@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Cryptograthy
 {
@@ -211,9 +212,50 @@ namespace Cryptograthy
                 }
             }
             textBox2.Text = new string(first_data);
+            StreamWriter sw = new StreamWriter("Output.txt", false, System.Text.Encoding.Default);
+            sw.Write(first_data);
+            sw.Close();
         }
 
 
+        private void Skytala()
+        {
+            char[] first_data = textBox1.Text.ToCharArray();
+            int row_amount = 0;
+            foreach (Control ctrl in controls)// подписываем каждый элемент списка на 
+            {
+                if (ctrl.GetType() == typeof(ComboBox))
+                {
+                    ComboBox cmb = (ComboBox)ctrl;
+                    if (cmb.SelectedItem != null)
+                    {
+                        row_amount = int.Parse(cmb.SelectedItem.ToString());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Неправильное значение ключа", "Некорректные данные");
+                        return;
+                    }
+                    break;
+
+                }
+
+            }
+            int column_amount = (int)((first_data.Length-1)/ row_amount) +1;
+            
+
+
+            for (int j = 0; j < column_amount; ++j)
+            {
+                for (int i = 0; i < row_amount; ++i)
+                {
+                    (i * column_amount + j < s.size()) ? s[i * column_amount + j] : '*';
+                }
+            }
+
+            textBox2.Text = new string(first_data);
+
+        }
 
         private void atbash_button_Click(object sender, EventArgs e)
         {
@@ -232,7 +274,9 @@ namespace Cryptograthy
                 Atbash();
             }
             else if (PressedButt == skytala_button)
-            { }
+            {
+                Skytala();
+            }
             else if (PressedButt == caesar_button)
             {
                 Caesar(Kind.ENCRYPT);
@@ -248,7 +292,9 @@ namespace Cryptograthy
                 Atbash();
             }
             else if (PressedButt == skytala_button)
-            { }
+            {
+                Skytala();
+            }
             else if (PressedButt == caesar_button)
             {
                 Caesar(Kind.DECRYPT);
@@ -258,8 +304,26 @@ namespace Cryptograthy
 
         private void skytala_button_Click(object sender, EventArgs e)
         {
-            PressedButt = sender as Button;
             ClearPanel();
+            PressedButt = sender as Button;
+            Label lb = new Label();
+            lb.Location = new Point(21, 16);
+            lb.Text = "Количество строк";
+            lb.Size = new Size(98, 13);
+            ComboBox cb = new ComboBox();
+            cb.Location = new Point(125, 13);
+            cb.Size = new Size(58, 21);
+            cb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList; //запрет на ввод 
+            for (int i = 1; i < 34; i++)
+            {
+                cb.Items.Add(i);
+            }
+            controls.Add(lb);
+            controls.Add(cb);
+            InitialazePanel();
+           
+
+
         }
 
         private void caesar_button_Click(object sender, EventArgs e)
