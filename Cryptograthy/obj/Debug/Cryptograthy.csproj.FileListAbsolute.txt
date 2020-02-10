@@ -1,0 +1,10 @@
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\bin\Debug\Cryptograthy.exe.config
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\bin\Debug\Cryptograthy.exe
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\bin\Debug\Cryptograthy.pdb
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.csprojAssemblyReference.cache
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.Properties.Resources.resources
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.csproj.GenerateResource.cache
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.csproj.CoreCompileInputs.cache
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.exe
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.pdb
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.Form1.resources
