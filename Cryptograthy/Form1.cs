@@ -24,6 +24,7 @@ namespace Cryptograthy
 
         List<Control> controls = new List<Control>();
         Button PressedButt;
+        enum Kind { ENCRYPT, DECRYPT};
         ///=====
         private void ClearPanel()
         {
@@ -115,7 +116,7 @@ namespace Cryptograthy
 
         }
 
-        public void Caesar()
+        private void Caesar(Kind k)
         {
             char[] first_data = textBox1.Text.ToCharArray();
             int key =0;
@@ -131,12 +132,24 @@ namespace Cryptograthy
                     else
                     {
                         MessageBox.Show("Неправильное значение ключа", "Некорректные данные");
+                        return;
                     }
                     break;
+                    
                 }
 
             }
-
+            //одна функции на шифровку и дешивфроку 
+            //отличие лишь в знаке ключа
+            int keyR, keyE;
+            if (k == Kind.DECRYPT)
+            {
+                keyR = 33 - key;
+                keyE = 26 - key;
+            }
+            else
+                keyR = keyE = key;
+                
             bool keyLow, keyUp;
             for (int i = 0; i < first_data.Length; i++)
             {
@@ -147,7 +160,7 @@ namespace Cryptograthy
                     {
                         if (first_data[i] == RUS[j])
                         {
-                            first_data[i] = RUS[(j+key)%33];
+                            first_data[i] = RUS[(j+keyR)%33];
                             keyUp = false;
                             break;
                         }
@@ -159,7 +172,7 @@ namespace Cryptograthy
                         {
                             if (first_data[i] == ENG[j])
                             {
-                                first_data[i] = ENG[(j + key) % 26];
+                                first_data[i] = ENG[(j + keyE) % 26];
                                 keyLow = false;
                                 break;
                             }
@@ -175,7 +188,7 @@ namespace Cryptograthy
                     {
                         if (first_data[i] == eng[j])
                         {
-                            first_data[i] = eng[(j + key) % 26 ];
+                            first_data[i] = eng[(j + keyE) % 26 ];
                             keyLow = false;
                             break;
                         }
@@ -187,7 +200,7 @@ namespace Cryptograthy
                         {
                             if (first_data[i] == rus[j])
                             {
-                                first_data[i] = rus[(j + key) % 33 ];
+                                first_data[i] = rus[(j + keyR) % 33 ];
                                 break;
                             }
 
@@ -213,7 +226,7 @@ namespace Cryptograthy
         private void cypher_Click(object sender, EventArgs e)
         {
          
-            
+            //ШИФРОВКА
             if (PressedButt == atbash_button)
             {
                 Atbash();
@@ -222,14 +235,14 @@ namespace Cryptograthy
             { }
             else if (PressedButt == caesar_button)
             {
-                Caesar();
+                Caesar(Kind.ENCRYPT);
             }
-            
+            //ШИФРОВКА
         }
 
         private void decypher_Click(object sender, EventArgs e)
         {
-
+            //РАСШИФРОВКА
             if (PressedButt == atbash_button)
             {
                 Atbash();
@@ -238,8 +251,9 @@ namespace Cryptograthy
             { }
             else if (PressedButt == caesar_button)
             {
-                Caesar();
+                Caesar(Kind.DECRYPT);
             }
+            //РАСШИФРОВКА
         }
 
         private void skytala_button_Click(object sender, EventArgs e)
