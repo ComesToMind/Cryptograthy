@@ -218,9 +218,10 @@ namespace Cryptograthy
         }
 
 
-        private void Skytala()
+        private void Skytala(Kind k)
         {
             char[] first_data = textBox1.Text.ToCharArray();
+            char[] second_data = textBox1.Text.ToCharArray();
             int row_amount = 0;
             foreach (Control ctrl in controls)// подписываем каждый элемент списка на 
             {
@@ -242,18 +243,21 @@ namespace Cryptograthy
 
             }
             int column_amount = (int)((first_data.Length-1)/ row_amount) +1;
-            
-
-
-            for (int j = 0; j < column_amount; ++j)
+            if (k == Kind.DECRYPT)
             {
-                for (int i = 0; i < row_amount; ++i)
-                {
-                    (i * column_amount + j < s.size()) ? s[i * column_amount + j] : '*';
-                }
+                int temp = column_amount;
+                column_amount = row_amount;
+                row_amount = temp;
+            }
+            int index;
+            //Array.Clear(second_data,0,second_data.Length);
+            for (int i = 0; i < second_data.Length; i++)
+            {
+                index = row_amount *(i % column_amount) + (i / column_amount);
+                second_data[index] = first_data[i];
             }
 
-            textBox2.Text = new string(first_data);
+            textBox2.Text = new string(second_data);
 
         }
 
@@ -275,7 +279,7 @@ namespace Cryptograthy
             }
             else if (PressedButt == skytala_button)
             {
-                Skytala();
+                Skytala(Kind.ENCRYPT);
             }
             else if (PressedButt == caesar_button)
             {
@@ -293,7 +297,7 @@ namespace Cryptograthy
             }
             else if (PressedButt == skytala_button)
             {
-                Skytala();
+                Skytala(Kind.DECRYPT);
             }
             else if (PressedButt == caesar_button)
             {
