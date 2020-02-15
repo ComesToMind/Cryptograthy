@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+//using static Cryptograthy.Innitial;
 
 namespace Cryptograthy
 {
@@ -25,7 +26,7 @@ namespace Cryptograthy
 
         List<Control> controls = new List<Control>();
         Button PressedButt;
-        enum Kind { ENCRYPT, DECRYPT};
+        enum Kind { ENCRYPT, DECRYPT };
         TextBox tb;
         ///=====
         private void ClearPanel()
@@ -38,7 +39,7 @@ namespace Cryptograthy
             }
 
         }
-        
+
         private void InitialazePanel()
         {
             foreach (Control ctrl in controls)// подписываем каждый элемент списка на клик
@@ -52,15 +53,15 @@ namespace Cryptograthy
 
             if (!Char.IsDigit(e.KeyChar))
             {
-                if (e.KeyChar !=8)
+                if (e.KeyChar != 8)
                 {
                     e.Handled = true;
                 }
             }
-                
 
-           
-            
+
+
+
         }
 
 
@@ -136,7 +137,7 @@ namespace Cryptograthy
         private void Caesar(Kind k)
         {
             char[] first_data = textBox1.Text.ToCharArray();
-            int key =0;
+            int key = 0;
             foreach (Control ctrl in controls)// подписываем каждый элемент списка на 
             {
                 if (ctrl.GetType() == typeof(ComboBox))
@@ -152,7 +153,7 @@ namespace Cryptograthy
                         return;
                     }
                     break;
-                    
+
                 }
 
             }
@@ -166,7 +167,7 @@ namespace Cryptograthy
             }
             else
                 keyR = keyE = key;
-                
+
             bool keyLow, keyUp;
             for (int i = 0; i < first_data.Length; i++)
             {
@@ -177,7 +178,7 @@ namespace Cryptograthy
                     {
                         if (first_data[i] == RUS[j])
                         {
-                            first_data[i] = RUS[(j+keyR)%33];
+                            first_data[i] = RUS[(j + keyR) % 33];
                             keyUp = false;
                             break;
                         }
@@ -205,7 +206,7 @@ namespace Cryptograthy
                     {
                         if (first_data[i] == eng[j])
                         {
-                            first_data[i] = eng[(j + keyE) % 26 ];
+                            first_data[i] = eng[(j + keyE) % 26];
                             keyLow = false;
                             break;
                         }
@@ -217,7 +218,7 @@ namespace Cryptograthy
                         {
                             if (first_data[i] == rus[j])
                             {
-                                first_data[i] = rus[(j + keyR) % 33 ];
+                                first_data[i] = rus[(j + keyR) % 33];
                                 break;
                             }
 
@@ -258,7 +259,7 @@ namespace Cryptograthy
                 }
 
             }
-            int column_amount = (int)((first_data.Length-1)/ row_amount) +1;
+            int column_amount = (int)((first_data.Length - 1) / row_amount) + 1;
             if (k == Kind.DECRYPT)
             {
                 int temp = column_amount;
@@ -285,50 +286,52 @@ namespace Cryptograthy
         public void Polybius()
         {
             char[] first_data = textBox1.Text.ToCharArray();
-            //char[] second_data = textBox1.Text.ToCharArray();
-            //List<char> second_data = new List<char>();
+            char[] r = rus.ToCharArray();
+            char[] e = eng.ToCharArray();
+            //функция добавления флага в алфавит
+            FlagAlphabet(ref r, ref e);
             bool UP = false;
             char smb = ' ';
-            for(int k = 0;k<first_data.Length;k++)
+            for (int k = 0; k < first_data.Length; k++)
             {
                 smb = first_data[k];
                 UP = false;
                 if (Char.IsUpper(first_data[k]))
                 {
-                    first_data[k]= Char.ToLower(first_data[k]);
+                    first_data[k] = Char.ToLower(first_data[k]);
                     UP = true;
                 }
 
-                for(int i = 0; i <rus.Length; i++)
+                for (int i = 0; i < r.Length; i++)
                 {
-                    if (first_data[k] == rus[i])
+                    if (first_data[k] == r[i])
                     {
                         if (i < 27)
                         {
-                            smb = rus[i + 6];
+                            smb = r[i + 6];
                             goto Find;
                         }
                         else
                         {
-                            smb = rus[0 + i%6];
+                            smb = r[0 + i % 6];
                             goto Find;
                         }
                     }
 
-                    
+
                 }
                 for (int i = 0; i < eng.Length; i++)
                 {
-                    if (first_data[k] == eng[i])
+                    if (first_data[k] == e[i])
                     {
                         if (i < 20)
                         {
-                            smb = eng[i + 6];
+                            smb = e[i + 6];
                             goto Find;
                         }
                         else
                         {
-                            smb = eng[0 + i % 6];
+                            smb = e[0 + i % 6];
                             goto Find;
                         }
                     }
@@ -339,7 +342,7 @@ namespace Cryptograthy
             Find:
                 if (UP)
                 {
-                    first_data[k]=Char.ToUpper(smb);
+                    first_data[k] = Char.ToUpper(smb);
                 }
                 else
                 {
@@ -355,6 +358,10 @@ namespace Cryptograthy
         public void dePolybius()
         {
             char[] first_data = textBox1.Text.ToCharArray();
+            char[] r = rus.ToCharArray();
+            char[] e = eng.ToCharArray();
+            //функция добавления флага в алфавит
+            FlagAlphabet(ref r,ref e);
             bool UP = false;
             char smb = ' ';
             for (int k = 0; k < first_data.Length; k++)
@@ -367,26 +374,26 @@ namespace Cryptograthy
                     UP = true;
                 }
 
-                for (int i = 0; i < rus.Length; i++)
+                for (int i = 0; i < r.Length; i++)
                 {
-                    if (first_data[k] == rus[i])
+                    if (first_data[k] == r[i])
                     {
                         if (i >= 6)
                         {
-                            smb = rus[i - 6];
+                            smb = r[i - 6];
                             goto Find;
                         }
                         else
                         {
-                            if (i>=0 && i<3)
+                            if (i >= 0 && i < 3)
                             {
                                 //буквы АБВ
-                                smb = rus[30 + i];
+                                smb = r[30 + i];
                                 goto Find;
                             }
-                            else if(i>=3 && i<6)
+                            else if (i >= 3 && i < 6)
                             {
-                                smb = rus[24 + i];
+                                smb = r[24 + i];
                                 goto Find;
                             }
                         }
@@ -394,25 +401,25 @@ namespace Cryptograthy
 
 
                 }
-                for (int i = 0; i < eng.Length; i++)
+                for (int i = 0; i < e.Length; i++)
                 {
-                    if (first_data[k] == eng[i])
+                    if (first_data[k] == e[i])
                     {
                         if (i >= 6)
                         {
-                            smb = eng[i - 6];
+                            smb = e[i - 6];
                             goto Find;
                         }
                         else
                         {
                             if (i >= 0 && i < 2)
                             {
-                                smb = eng[24+i];
+                                smb = e[24 + i];
                                 goto Find;
                             }
-                            else if (i>=2 && i<6)
+                            else if (i >= 2 && i < 6)
                             {
-                                smb = eng[18 + i];
+                                smb = e[18 + i];
                                 goto Find;
 
                             }
@@ -436,6 +443,111 @@ namespace Cryptograthy
             }
             textBox2.Text = new string(first_data);
         }
+
+        public void FlagAlphabet(ref char[] r,ref char[] e)
+        {
+            char[] flag = null;
+            foreach (Control ctrl in controls)
+            {
+                if (ctrl.GetType() == typeof(TextBox))
+                {
+                    TextBox cmb = (TextBox)ctrl;
+                    if (cmb.Text != null && !cmb.Text.Equals(""))
+                    {
+                        flag = cmb.Text.ToCharArray();
+                    }
+                    else
+                    {
+                        //MessageBox.Show("Неправильное значение ключа", "Некорректные данные");
+                        return;
+                    }
+                    break;
+
+                }
+
+            }
+
+            //проверка на корректность ключа
+            for (int i = 0; i < flag.Length; i++)
+            {
+                for (int j = 0; j < flag.Length; j++)
+                {
+                    if (flag[i] == flag[j] && j != i)
+                    {
+                        MessageBox.Show("Неправильное значение ключа. Повтор символов", "Некорректные данные");
+                        return;
+                    }
+                }
+            }
+
+            int r_counter = 0, e_counter = 0; //количество добавленных букв в начало алфавита
+            for (int k = 0; k < flag.Length; k++)
+            {
+
+                if (Char.IsUpper(flag[k]))
+                {
+                    flag[k] = Char.ToLower(flag[k]);
+                }
+
+                for (int i = 0; i < rus.Length; i++)
+                {
+                    if (flag[k] == rus[i])
+                    {
+                        r[r_counter] = flag[k];
+                        r_counter++;
+                        break;
+
+                    }
+                }
+                for (int i = 0; i < eng.Length; i++)
+                {
+                    if (flag[k] == eng[i])
+                    {
+                        e[e_counter] = flag[k];
+                        e_counter++;
+                        break;
+                    }
+                }
+            }
+            int counter = r_counter;
+            bool fl;
+            foreach (char var in rus)
+            {
+                fl = false;
+                for(int i = 0; i<r_counter;i++)
+                {
+                    if (r[i] == var)
+                    {
+                        fl = true;
+                        break;
+                    }
+                        
+                }
+                if(!fl)
+                    r[counter] = var;
+                counter++;
+
+            }
+            counter = e_counter;
+            foreach (char var in eng)
+            {
+                fl = false;
+                for (int i = 0; i < e_counter; i++)
+                {
+                    if (e[i] == var)
+                    {
+                        fl = true;
+                        break;
+                    }
+
+                }
+                if (!fl)
+                    e[counter] = var;
+                counter++;
+
+            }
+        }
+
 
         private void atbash_button_Click(object sender, EventArgs e)
         {
