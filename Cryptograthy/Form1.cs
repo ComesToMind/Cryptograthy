@@ -238,7 +238,7 @@ namespace Cryptograthy
         private void Skytala(Kind k)
         {
             char[] first_data = textBox1.Text.ToCharArray();
-            //char[] second_data = textBox1.Text.ToCharArray();
+            char[] second_data = textBox1.Text.ToCharArray();
             int row_amount = 0;
             foreach (Control ctrl in controls)// подписываем каждый элемент списка на 
             {
@@ -273,13 +273,26 @@ namespace Cryptograthy
 
             //char[] second_data = numbers.ToArray<char>();
 
-            //for (int i = 0; i < first_data.Length; i++)
-            //{
-            //    index = row_amount *(i % column_amount) + (i / column_amount);
-            //    second_data[index] = first_data[i];
-            //}
+            for (int i = 0; i < first_data.Length; i++)
+            {
+                //проверка на первую строку
+                if (i < column_amount)
+                {
+                    index = row_amount * i + (i / column_amount);
+                    second_data[index] = first_data[i];
+                }
+                else
+                {
+                    index = row_amount * (i % column_amount) + (i / column_amount);
+                    if(index<first_data.Length)
+                        second_data[index] = first_data[i];
 
-            //textBox2.Text = new string(second_data);
+
+                }
+
+            }
+
+            textBox2.Text = new string(second_data);
 
         }
 
