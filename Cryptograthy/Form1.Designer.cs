@@ -32,9 +32,10 @@
             this.atbash_button = new System.Windows.Forms.Button();
             this.skytala_button = new System.Windows.Forms.Button();
             this.caesar_button = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.polybius_button = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,7 +43,6 @@
             this.panel_each = new System.Windows.Forms.Panel();
             this.decypher = new System.Windows.Forms.Button();
             this.cypher = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel2.SuspendLayout();
             this.panel_each.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +53,7 @@
             this.flowLayoutPanel2.Controls.Add(this.atbash_button);
             this.flowLayoutPanel2.Controls.Add(this.skytala_button);
             this.flowLayoutPanel2.Controls.Add(this.caesar_button);
-            this.flowLayoutPanel2.Controls.Add(this.button4);
+            this.flowLayoutPanel2.Controls.Add(this.polybius_button);
             this.flowLayoutPanel2.Controls.Add(this.button5);
             this.flowLayoutPanel2.Controls.Add(this.button6);
             this.flowLayoutPanel2.Controls.Add(this.button1);
@@ -97,15 +97,16 @@
             this.caesar_button.UseVisualStyleBackColor = true;
             this.caesar_button.Click += new System.EventHandler(this.caesar_button_Click);
             // 
-            // button4
+            // polybius_button
             // 
-            this.button4.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(3, 222);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(133, 67);
-            this.button4.TabIndex = 0;
-            this.button4.Text = "button1";
-            this.button4.UseVisualStyleBackColor = true;
+            this.polybius_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.polybius_button.Location = new System.Drawing.Point(3, 222);
+            this.polybius_button.Name = "polybius_button";
+            this.polybius_button.Size = new System.Drawing.Size(133, 67);
+            this.polybius_button.TabIndex = 0;
+            this.polybius_button.Text = "Квадрат Полибия";
+            this.polybius_button.UseVisualStyleBackColor = true;
+            this.polybius_button.Click += new System.EventHandler(this.polybius_button_Click);
             // 
             // button5
             // 
@@ -114,7 +115,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(133, 67);
             this.button5.TabIndex = 0;
-            this.button5.Text = "button1";
+            this.button5.Text = "Шифр Кардано";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // button6
@@ -124,8 +125,18 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(133, 67);
             this.button6.TabIndex = 0;
-            this.button6.Text = "button1";
+            this.button6.Text = "Шифр Ришелье";
             this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Location = new System.Drawing.Point(3, 441);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(133, 67);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
@@ -192,16 +203,6 @@
             this.cypher.UseVisualStyleBackColor = true;
             this.cypher.Click += new System.EventHandler(this.cypher_Click);
             // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(3, 441);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 67);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -234,7 +235,7 @@
         private System.Windows.Forms.Button atbash_button;
         private System.Windows.Forms.Button skytala_button;
         private System.Windows.Forms.Button caesar_button;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button polybius_button;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button decypher;

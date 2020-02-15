@@ -26,6 +26,7 @@ namespace Cryptograthy
         List<Control> controls = new List<Control>();
         Button PressedButt;
         enum Kind { ENCRYPT, DECRYPT};
+        TextBox tb;
         ///=====
         private void ClearPanel()
         {
@@ -45,7 +46,22 @@ namespace Cryptograthy
         }
         //============
 
+        private void tb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //textBox2.Text = e.KeyChar.ToString();
 
+            if (!Char.IsDigit(e.KeyChar))
+            {
+                if (e.KeyChar !=8)
+                {
+                    e.Handled = true;
+                }
+            }
+                
+
+           
+            
+        }
 
 
 
@@ -221,16 +237,16 @@ namespace Cryptograthy
         private void Skytala(Kind k)
         {
             char[] first_data = textBox1.Text.ToCharArray();
-            char[] second_data = textBox1.Text.ToCharArray();
+            //char[] second_data = textBox1.Text.ToCharArray();
             int row_amount = 0;
             foreach (Control ctrl in controls)// подписываем каждый элемент списка на 
             {
-                if (ctrl.GetType() == typeof(ComboBox))
+                if (ctrl.GetType() == typeof(TextBox))
                 {
-                    ComboBox cmb = (ComboBox)ctrl;
-                    if (cmb.SelectedItem != null)
+                    TextBox cmb = (TextBox)ctrl;
+                    if (cmb.Text != null && !cmb.Text.Equals(""))
                     {
-                        row_amount = int.Parse(cmb.SelectedItem.ToString());
+                        row_amount = int.Parse(cmb.Text.ToString());
                     }
                     else
                     {
@@ -250,15 +266,175 @@ namespace Cryptograthy
                 row_amount = temp;
             }
             int index;
-            //Array.Clear(second_data,0,second_data.Length);
-            for (int i = 0; i < second_data.Length; i++)
+
+
+            //List<char> numbers = new List<char>();
+
+            //char[] second_data = numbers.ToArray<char>();
+
+            //for (int i = 0; i < first_data.Length; i++)
+            //{
+            //    index = row_amount *(i % column_amount) + (i / column_amount);
+            //    second_data[index] = first_data[i];
+            //}
+
+            //textBox2.Text = new string(second_data);
+
+        }
+
+        public void Polybius()
+        {
+            char[] first_data = textBox1.Text.ToCharArray();
+            //char[] second_data = textBox1.Text.ToCharArray();
+            //List<char> second_data = new List<char>();
+            bool UP = false;
+            char smb = ' ';
+            for(int k = 0;k<first_data.Length;k++)
             {
-                index = row_amount *(i % column_amount) + (i / column_amount);
-                second_data[index] = first_data[i];
+                smb = first_data[k];
+                UP = false;
+                if (Char.IsUpper(first_data[k]))
+                {
+                    first_data[k]= Char.ToLower(first_data[k]);
+                    UP = true;
+                }
+
+                for(int i = 0; i <rus.Length; i++)
+                {
+                    if (first_data[k] == rus[i])
+                    {
+                        if (i < 27)
+                        {
+                            smb = rus[i + 6];
+                            goto Find;
+                        }
+                        else
+                        {
+                            smb = rus[0 + i%6];
+                            goto Find;
+                        }
+                    }
+
+                    
+                }
+                for (int i = 0; i < eng.Length; i++)
+                {
+                    if (first_data[k] == eng[i])
+                    {
+                        if (i < 20)
+                        {
+                            smb = eng[i + 6];
+                            goto Find;
+                        }
+                        else
+                        {
+                            smb = eng[0 + i % 6];
+                            goto Find;
+                        }
+                    }
+
+
+                }
+
+            Find:
+                if (UP)
+                {
+                    first_data[k]=Char.ToUpper(smb);
+                }
+                else
+                {
+                    first_data[k] = smb;
+                }
+
+
             }
+            textBox2.Text = new string(first_data);
 
-            textBox2.Text = new string(second_data);
 
+        }
+        public void dePolybius()
+        {
+            char[] first_data = textBox1.Text.ToCharArray();
+            bool UP = false;
+            char smb = ' ';
+            for (int k = 0; k < first_data.Length; k++)
+            {
+                smb = first_data[k];
+                UP = false;
+                if (Char.IsUpper(first_data[k]))
+                {
+                    first_data[k] = Char.ToLower(first_data[k]);
+                    UP = true;
+                }
+
+                for (int i = 0; i < rus.Length; i++)
+                {
+                    if (first_data[k] == rus[i])
+                    {
+                        if (i >= 6)
+                        {
+                            smb = rus[i - 6];
+                            goto Find;
+                        }
+                        else
+                        {
+                            if (i>=0 && i<3)
+                            {
+                                //буквы АБВ
+                                smb = rus[30 + i];
+                                goto Find;
+                            }
+                            else if(i>=3 && i<6)
+                            {
+                                smb = rus[24 + i];
+                                goto Find;
+                            }
+                        }
+                    }
+
+
+                }
+                for (int i = 0; i < eng.Length; i++)
+                {
+                    if (first_data[k] == eng[i])
+                    {
+                        if (i >= 6)
+                        {
+                            smb = eng[i - 6];
+                            goto Find;
+                        }
+                        else
+                        {
+                            if (i >= 0 && i < 2)
+                            {
+                                smb = eng[24+i];
+                                goto Find;
+                            }
+                            else if (i>=2 && i<6)
+                            {
+                                smb = eng[18 + i];
+                                goto Find;
+
+                            }
+                        }
+                    }
+
+
+                }
+
+            Find:
+                if (UP)
+                {
+                    first_data[k] = Char.ToUpper(smb);
+                }
+                else
+                {
+                    first_data[k] = smb;
+                }
+
+
+            }
+            textBox2.Text = new string(first_data);
         }
 
         private void atbash_button_Click(object sender, EventArgs e)
@@ -271,7 +447,7 @@ namespace Cryptograthy
 
         private void cypher_Click(object sender, EventArgs e)
         {
-         
+
             //ШИФРОВКА
             if (PressedButt == atbash_button)
             {
@@ -284,6 +460,10 @@ namespace Cryptograthy
             else if (PressedButt == caesar_button)
             {
                 Caesar(Kind.ENCRYPT);
+            }
+            else if (PressedButt == polybius_button)
+            {
+                Polybius();
             }
             //ШИФРОВКА
         }
@@ -303,6 +483,10 @@ namespace Cryptograthy
             {
                 Caesar(Kind.DECRYPT);
             }
+            else if (PressedButt == polybius_button)
+            {
+                dePolybius();
+            }
             //РАСШИФРОВКА
         }
 
@@ -314,16 +498,22 @@ namespace Cryptograthy
             lb.Location = new Point(21, 16);
             lb.Text = "Количество строк";
             lb.Size = new Size(98, 13);
-            ComboBox cb = new ComboBox();
-            cb.Location = new Point(125, 13);
-            cb.Size = new Size(58, 21);
-            cb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList; //запрет на ввод 
-            for (int i = 1; i < 34; i++)
-            {
-                cb.Items.Add(i);
-            }
+
+             tb = new TextBox();
+            tb.Location = new Point(125, 13);
+            tb.Size = new Size(58, 21);
+            tb.KeyPress += tb_KeyPress;
+            
+            //ComboBox cb = new ComboBox();
+            //cb.Location = new Point(125, 13);
+            //cb.Size = new Size(58, 21);
+            //cb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList; //запрет на ввод 
+            //for (int i = 1; i < 34; i++)
+            //{
+            //    cb.Items.Add(i);
+            //}
             controls.Add(lb);
-            controls.Add(cb);
+            controls.Add(tb);
             InitialazePanel();
            
 
@@ -342,7 +532,7 @@ namespace Cryptograthy
             cb.Location = new Point(107, 13);
             cb.Size = new Size(50, 13);
             cb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList; //запрет на ввод 
-            for (int i = 1; i < 34; i++)
+            for (int i = 1; i < 67; i++)
             {
                 cb.Items.Add(i);
             }
@@ -350,6 +540,25 @@ namespace Cryptograthy
             controls.Add(cb);
             InitialazePanel();
 
+
+        }
+
+        private void polybius_button_Click(object sender, EventArgs e)
+        {
+            ClearPanel();
+            PressedButt = sender as Button;
+            Label lb = new Label();
+            lb.Location = new Point(5, 16);
+            lb.Text = "Кодовое слово: ";
+            lb.Size = new Size(98, 13);
+
+            tb = new TextBox();
+            tb.Location = new Point(105, 13);
+            tb.Size = new Size(85, 21);
+            //можно сделать проверку на символы 
+            controls.Add(lb);
+            controls.Add(tb);
+            InitialazePanel();
 
         }
     }
