@@ -35,7 +35,7 @@
             this.polybius_button = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.alberti_button = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -56,7 +56,7 @@
             this.flowLayoutPanel2.Controls.Add(this.polybius_button);
             this.flowLayoutPanel2.Controls.Add(this.button5);
             this.flowLayoutPanel2.Controls.Add(this.button6);
-            this.flowLayoutPanel2.Controls.Add(this.button1);
+            this.flowLayoutPanel2.Controls.Add(this.alberti_button);
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -128,15 +128,16 @@
             this.button6.Text = "Шифр Ришелье";
             this.button6.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // alberti_button
             // 
-            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(3, 441);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 67);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.alberti_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.alberti_button.Location = new System.Drawing.Point(3, 441);
+            this.alberti_button.Name = "alberti_button";
+            this.alberti_button.Size = new System.Drawing.Size(133, 67);
+            this.alberti_button.TabIndex = 1;
+            this.alberti_button.Text = "Диск Альберти";
+            this.alberti_button.UseVisualStyleBackColor = true;
+            this.alberti_button.Click += new System.EventHandler(this.alberti_button_Click);
             // 
             // textBox1
             // 
@@ -240,7 +241,7 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button decypher;
         private System.Windows.Forms.Button cypher;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button alberti_button;
     }
 }
 

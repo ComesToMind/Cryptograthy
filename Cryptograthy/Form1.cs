@@ -24,6 +24,8 @@ namespace Cryptograthy
         string eng = "abcdefghijklmnopqrstuvwxyz";
         string ENG = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+        
+        
         List<Control> controls = new List<Control>();
         Button PressedButt;
         enum Kind { ENCRYPT, DECRYPT };
@@ -66,74 +68,7 @@ namespace Cryptograthy
 
 
 
-        public void Atbash()
-        {
-            char[] first_data = textBox1.Text.ToCharArray();
-            bool keyLow, keyUp;
-            for (int i = 0; i < first_data.Length; i++)
-            {
-                keyLow = keyUp = true;
-                if (char.IsUpper(first_data[i]))
-                {
-                    for (int j = 0; (j < 33); j++)
-                    {
-                        if (first_data[i] == RUS[j])
-                        {
-                            first_data[i] = RUS[32 - j];
-                            keyUp = false;
-                            break;
-                        }
-
-                    }
-                    if (keyUp)
-                    {
-                        for (int j = 0; (j < 26); j++)
-                        {
-                            if (first_data[i] == ENG[j])
-                            {
-                                first_data[i] = ENG[25 - j];
-                                keyLow = false;
-                                break;
-                            }
-
-                        }
-                    }
-
-                }
-
-                if (keyUp)
-                {
-                    for (int j = 0; j < 26; j++)
-                    {
-                        if (first_data[i] == eng[j])
-                        {
-                            first_data[i] = eng[25 - j];
-                            keyLow = false;
-                            break;
-                        }
-
-                    }
-                    if (keyLow)
-                    {
-                        for (int j = 0; j < 33; j++)
-                        {
-                            if (first_data[i] == rus[j])
-                            {
-                                first_data[i] = rus[32 - j];
-                                break;
-                            }
-
-                        }
-                    }
-
-
-                }
-            }
-
-            textBox2.Text = new string(first_data);
-
-        }
-
+        
         private void Caesar(Kind k)
         {
             char[] first_data = textBox1.Text.ToCharArray();
@@ -286,8 +221,6 @@ namespace Cryptograthy
                     index = row_amount * (i % column_amount) + (i / column_amount);
                     if(index<first_data.Length)
                         second_data[index] = first_data[i];
-
-
                 }
 
             }
@@ -561,6 +494,8 @@ namespace Cryptograthy
             }
         }
 
+    
+
 
         private void atbash_button_Click(object sender, EventArgs e)
         {
@@ -590,6 +525,10 @@ namespace Cryptograthy
             {
                 Polybius();
             }
+            else if (PressedButt == alberti_button)
+            {
+                Alberti_s_disk();
+            }
             //ШИФРОВКА
         }
 
@@ -611,6 +550,10 @@ namespace Cryptograthy
             else if (PressedButt == polybius_button)
             {
                 dePolybius();
+            }
+            else if (PressedButt == alberti_button)
+            {
+                deAlberti_s_disk();
             }
             //РАСШИФРОВКА
         }
@@ -680,6 +623,26 @@ namespace Cryptograthy
             tb = new TextBox();
             tb.Location = new Point(105, 13);
             tb.Size = new Size(85, 21);
+            //можно сделать проверку на символы 
+            controls.Add(lb);
+            controls.Add(tb);
+            InitialazePanel();
+
+        }
+
+        private void alberti_button_Click(object sender, EventArgs e)
+        {
+            ClearPanel();
+            PressedButt = sender as Button;
+            Label lb = new Label();
+            lb.Location = new Point(5, 16);
+            lb.Text = "Введите ключ: ";
+            lb.Size = new Size(98, 13);
+
+            tb = new TextBox();
+            tb.Location = new Point(105, 13);
+            tb.Size = new Size(45, 21);
+            tb.KeyPress += tb_KeyPress;
             //можно сделать проверку на символы 
             controls.Add(lb);
             controls.Add(tb);
