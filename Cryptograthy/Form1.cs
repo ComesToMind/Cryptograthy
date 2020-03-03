@@ -203,26 +203,9 @@ namespace Cryptograthy
             }
             int index;
 
-
-            //List<char> numbers = new List<char>();
-
-            //char[] second_data = numbers.ToArray<char>();
-
             for (int i = 0; i < first_data.Length; i++)
             {
-                //проверка на первую строку
-                if (i < column_amount)
-                {
-                    index = row_amount * i + (i / column_amount);
-                    second_data[index] = first_data[i];
-                }
-                else
-                {
-                    index = row_amount * (i % column_amount) + (i / column_amount);
-                    if(index<first_data.Length)
-                        second_data[index] = first_data[i];
-                }
-
+               
             }
 
             textBox2.Text = new string(second_data);
@@ -392,7 +375,7 @@ namespace Cryptograthy
 
         public void FlagAlphabet(ref char[] r,ref char[] e)
         {
-            char[] flag = null;
+            char[] flagInit = null;
             foreach (Control ctrl in controls)
             {
                 if (ctrl.GetType() == typeof(TextBox))
@@ -400,7 +383,7 @@ namespace Cryptograthy
                     TextBox cmb = (TextBox)ctrl;
                     if (cmb.Text != null && !cmb.Text.Equals(""))
                     {
-                        flag = cmb.Text.ToCharArray();
+                        flagInit = cmb.Text.ToCharArray();
                     }
                     else
                     {
@@ -412,19 +395,39 @@ namespace Cryptograthy
                 }
 
             }
-
+            List<char> flagList= new List<char>();
             //проверка на корректность ключа
-            for (int i = 0; i < flag.Length; i++)
+            //for (int i = 0; i < flag.Length; i++)
+            //{
+            //    for (int j = 0; j < flag.Length; j++)
+            //    {
+            //        if (flag[i] == flag[j] && j != i)
+            //        {
+            //            MessageBox.Show("Неправильное значение ключа. Повтор символов", "Некорректные данные");
+            //            return;
+            //        }
+            //    }
+            //}
+
+            ///создаем ключ без повторяющизся символов 
+
+            bool findSymb;
+            for (int i = 0; i < flagInit.Length; i++)
             {
-                for (int j = 0; j < flag.Length; j++)
+                findSymb = false;
+                foreach (char var in flagList)
                 {
-                    if (flag[i] == flag[j] && j != i)
+                    if (var == flagInit[i])
                     {
-                        MessageBox.Show("Неправильное значение ключа. Повтор символов", "Некорректные данные");
-                        return;
+                        findSymb = true;
                     }
                 }
+                if (!findSymb)
+                {
+                    flagList.Add(flagInit[i]);
+                }
             }
+            char[] flag = flagList.ToArray();
 
             int r_counter = 0, e_counter = 0; //количество добавленных букв в начало алфавита
             for (int k = 0; k < flag.Length; k++)
@@ -455,6 +458,7 @@ namespace Cryptograthy
                     }
                 }
             }
+            
             int counter = r_counter;
             bool fl;
             foreach (char var in rus)
@@ -462,16 +466,18 @@ namespace Cryptograthy
                 fl = false;
                 for(int i = 0; i<r_counter;i++)
                 {
-                    if (r[i] == var)
+                    if (r[i] == var)//буква алфавита есть в ключе, то 
                     {
-                        fl = true;
+                        fl = true; //
                         break;
                     }
                         
                 }
-                if(!fl)
+                if (!fl)
+                {
                     r[counter] = var;
-                counter++;
+                    counter++;
+                }
 
             }
             counter = e_counter;
@@ -488,8 +494,10 @@ namespace Cryptograthy
 
                 }
                 if (!fl)
+                {
                     e[counter] = var;
-                counter++;
+                    counter++;
+                }
 
             }
         }
