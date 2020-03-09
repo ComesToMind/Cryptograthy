@@ -72,6 +72,7 @@ namespace Cryptograthy
         private void Caesar(Kind k)
         {
             char[] first_data = textBox1.Text.ToCharArray();
+            char[] second_data = textBox1.Text.ToCharArray();
             int key = 0;
             foreach (Control ctrl in controls)// подписываем каждый элемент списка на 
             {
@@ -182,6 +183,7 @@ namespace Cryptograthy
                     TextBox cmb = (TextBox)ctrl;
                     if (cmb.Text != null && !cmb.Text.Equals(""))
                     {
+
                         row_amount = int.Parse(cmb.Text.ToString());
                     }
                     else
@@ -194,23 +196,55 @@ namespace Cryptograthy
                 }
 
             }
+            if (row_amount==0)
+            {
+                MessageBox.Show("Неправильное значение ключа", "Некорректные данные");
+                return;
+            }
+
             int column_amount = (int)((first_data.Length - 1) / row_amount) + 1;
+            if (k == Kind.ENCRYPT)
+            {
+                int index = 0;
+
+                for (int i = 0; i < column_amount; i++)
+                {
+                    for (int j = 0; j < row_amount; j++)
+                    {
+                        if (j * column_amount + i < first_data.Length)
+                        {
+                            second_data[index] = first_data[j * column_amount + i];
+                            index++;
+                        }
+
+                    }
+                }
+            }
             if (k == Kind.DECRYPT)
             {
-                int temp = column_amount;
-                column_amount = row_amount;
-                row_amount = temp;
-            }
-            int index;
+                int index = 0;
+                
+                            
+                for (int i = 0; i < column_amount; i++)
+                {
+                    for (int j = 0; j < row_amount; j++)
+                    {
+                        if ((i + column_amount * j) < first_data.Length)
+                        {
+                            second_data[i + column_amount * j] = first_data[index];
+                            index++;
+                        }
+                    }
+                }
 
-            for (int i = 0; i < first_data.Length; i++)
-            {
-               
+
+
             }
 
             textBox2.Text = new string(second_data);
 
         }
+
 
         public void Polybius()
         {
@@ -500,6 +534,19 @@ namespace Cryptograthy
                 }
 
             }
+            //panel_alpabet_rus.Controls.Clear();
+            //Label[] lb = new Label[33];
+            //for (int i = 0; i < lb.Length; i++)
+            //{
+            //    lb[i] = new System.Windows.Forms.Label();
+            //    lb[i].Location = new System.Drawing.Point(3, 50 + i * 30);
+            //    lb[i].Name = "lb" + i.ToString();
+            //    lb[i].Size = new System.Drawing.Size(13, 13);
+            //    lb[i].TabIndex = i;
+            //    lb[i].Text = r[i].ToString();
+            //    panel_alpabet_rus.Controls.Add(lb[i]);
+            //}
+            //InitialazePanel();
         }
 
     
@@ -655,6 +702,17 @@ namespace Cryptograthy
             controls.Add(lb);
             controls.Add(tb);
             InitialazePanel();
+
+        }
+
+        private void exchange_Click(object sender, EventArgs e)
+        {
+           
+            textBox1.Text = textBox2.Text;
+        }
+
+        private void panel_each_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }

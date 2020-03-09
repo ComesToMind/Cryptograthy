@@ -43,6 +43,7 @@
             this.panel_each = new System.Windows.Forms.Panel();
             this.decypher = new System.Windows.Forms.Button();
             this.cypher = new System.Windows.Forms.Button();
+            this.exchange = new System.Windows.Forms.Button();
             this.flowLayoutPanel2.SuspendLayout();
             this.panel_each.SuspendLayout();
             this.SuspendLayout();
@@ -179,10 +180,12 @@
             // 
             this.panel_each.Controls.Add(this.decypher);
             this.panel_each.Controls.Add(this.cypher);
+            this.panel_each.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.panel_each.Location = new System.Drawing.Point(187, 328);
             this.panel_each.Name = "panel_each";
             this.panel_each.Size = new System.Drawing.Size(583, 144);
             this.panel_each.TabIndex = 4;
+            this.panel_each.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_each_Paint);
             // 
             // decypher
             // 
@@ -204,12 +207,23 @@
             this.cypher.UseVisualStyleBackColor = true;
             this.cypher.Click += new System.EventHandler(this.cypher_Click);
             // 
+            // exchange
+            // 
+            this.exchange.Location = new System.Drawing.Point(462, 169);
+            this.exchange.Name = "exchange";
+            this.exchange.Size = new System.Drawing.Size(32, 33);
+            this.exchange.TabIndex = 5;
+            this.exchange.Text = "<--";
+            this.exchange.UseVisualStyleBackColor = true;
+            this.exchange.Click += new System.EventHandler(this.exchange_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(812, 484);
+            this.Controls.Add(this.exchange);
             this.Controls.Add(this.panel_each);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -242,6 +256,7 @@
         private System.Windows.Forms.Button decypher;
         private System.Windows.Forms.Button cypher;
         private System.Windows.Forms.Button alberti_button;
+        private System.Windows.Forms.Button exchange;
     }
 }
 

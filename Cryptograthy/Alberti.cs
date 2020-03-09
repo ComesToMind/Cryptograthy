@@ -37,10 +37,10 @@ namespace Cryptograthy
             }
             moveKey += innitilaKey;
             bool UP = false;
-           // char smb = ' ';
+
             for (int k = 0; k < first_data.Length; k++)
             {
-                //smb = first_data[k];
+         
                 UP = false;
                 if (Char.IsUpper(first_data[k]))
                 {
