@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+
 //using static Cryptograthy.Innitial;
 
 namespace Cryptograthy
@@ -28,7 +29,7 @@ namespace Cryptograthy
         
         List<Control> controls = new List<Control>();
         Button PressedButt;
-        enum Kind { ENCRYPT, DECRYPT };
+        public enum Kind { ENCRYPT, DECRYPT };
         TextBox tb;
         ///=====
         private void ClearPanel()
@@ -430,20 +431,7 @@ namespace Cryptograthy
 
             }
             List<char> flagList= new List<char>();
-            //проверка на корректность ключа
-            //for (int i = 0; i < flag.Length; i++)
-            //{
-            //    for (int j = 0; j < flag.Length; j++)
-            //    {
-            //        if (flag[i] == flag[j] && j != i)
-            //        {
-            //            MessageBox.Show("Неправильное значение ключа. Повтор символов", "Некорректные данные");
-            //            return;
-            //        }
-            //    }
-            //}
-
-            ///создаем ключ без повторяющизся символов 
+            
 
             bool findSymb;
             for (int i = 0; i < flagInit.Length; i++)
@@ -584,6 +572,10 @@ namespace Cryptograthy
             {
                 Alberti_s_disk();
             }
+            else if (PressedButt == gronsfeild_button)
+            {
+                Gronsfield(Kind.ENCRYPT);
+            }
             //ШИФРОВКА
         }
 
@@ -609,6 +601,10 @@ namespace Cryptograthy
             else if (PressedButt == alberti_button)
             {
                 deAlberti_s_disk();
+            }
+            else if (PressedButt == gronsfeild_button)
+            {
+                Gronsfield(Kind.DECRYPT);
             }
             //РАСШИФРОВКА
         }
@@ -714,6 +710,25 @@ namespace Cryptograthy
         private void panel_each_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void gronsfeild_button_Click(object sender, EventArgs e)
+        {
+            ClearPanel();
+            PressedButt = sender as Button;
+            Label lb = new Label();
+            lb.Location = new Point(5, 16);
+            lb.Text = "Введите ключ: ";
+            lb.Size = new Size(98, 13);
+                        
+
+            tb = new TextBox();
+            tb.Location = new Point(105, 13);
+            tb.Size = new Size(45, 21);
+            tb.KeyPress += tb_KeyPress;
+            controls.Add(lb);
+            controls.Add(tb);
+            InitialazePanel();
         }
     }
 }

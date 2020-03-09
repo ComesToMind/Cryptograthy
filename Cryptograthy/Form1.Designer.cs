@@ -44,6 +44,7 @@
             this.decypher = new System.Windows.Forms.Button();
             this.cypher = new System.Windows.Forms.Button();
             this.exchange = new System.Windows.Forms.Button();
+            this.gronsfeild_button = new System.Windows.Forms.Button();
             this.flowLayoutPanel2.SuspendLayout();
             this.panel_each.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +59,7 @@
             this.flowLayoutPanel2.Controls.Add(this.button5);
             this.flowLayoutPanel2.Controls.Add(this.button6);
             this.flowLayoutPanel2.Controls.Add(this.alberti_button);
+            this.flowLayoutPanel2.Controls.Add(this.gronsfeild_button);
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -217,6 +219,17 @@
             this.exchange.UseVisualStyleBackColor = true;
             this.exchange.Click += new System.EventHandler(this.exchange_Click);
             // 
+            // gronsfeild_button
+            // 
+            this.gronsfeild_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gronsfeild_button.Location = new System.Drawing.Point(3, 514);
+            this.gronsfeild_button.Name = "gronsfeild_button";
+            this.gronsfeild_button.Size = new System.Drawing.Size(133, 67);
+            this.gronsfeild_button.TabIndex = 4;
+            this.gronsfeild_button.Text = "Шифр Гронсфелда";
+            this.gronsfeild_button.UseVisualStyleBackColor = true;
+            this.gronsfeild_button.Click += new System.EventHandler(this.gronsfeild_button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -257,6 +270,7 @@
         private System.Windows.Forms.Button cypher;
         private System.Windows.Forms.Button alberti_button;
         private System.Windows.Forms.Button exchange;
+        private System.Windows.Forms.Button gronsfeild_button;
     }
 }
 
