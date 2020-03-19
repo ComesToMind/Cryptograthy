@@ -95,8 +95,12 @@ namespace Cryptograthy
                 textBox2.Text = new string(first_data);
 
             }
+
+            //дешифровка
             if (kind == Kind.DECRYPT)
             {
+                //здесь мы прибавляем ключ, отнятые от длины алфавита, т.к. модульная
+                //арифметика отрицательных чисел работает иначе в c#
                 for (int k = 0; k < first_data.Length; k++)
                 {
                     smb = first_data[k];
@@ -111,7 +115,7 @@ namespace Cryptograthy
                     {
                         if (first_data[k] == rus[i])
                         {
-                            smb = rus[(i - (flagList[k] - '0')) % 33];
+                            smb =rus[(i + (33 - (flagList[k] - '0'))) % 33];
                             goto Find;
 
                         }
@@ -122,7 +126,7 @@ namespace Cryptograthy
                     {
                         if (first_data[k] == eng[i])
                         {
-                            smb = eng[(i-(flagList[k] - '0')) % 26];
+                            smb = eng[(i+(26 -(flagList[k] - '0'))) % 26];
                             goto Find;
 
                         }

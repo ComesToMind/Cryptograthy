@@ -33,9 +33,8 @@
             this.skytala_button = new System.Windows.Forms.Button();
             this.caesar_button = new System.Windows.Forms.Button();
             this.polybius_button = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.alberti_button = new System.Windows.Forms.Button();
+            this.gronsfeild_button = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,7 +43,7 @@
             this.decypher = new System.Windows.Forms.Button();
             this.cypher = new System.Windows.Forms.Button();
             this.exchange = new System.Windows.Forms.Button();
-            this.gronsfeild_button = new System.Windows.Forms.Button();
+            this.vigenere_button = new System.Windows.Forms.Button();
             this.flowLayoutPanel2.SuspendLayout();
             this.panel_each.SuspendLayout();
             this.SuspendLayout();
@@ -56,10 +55,9 @@
             this.flowLayoutPanel2.Controls.Add(this.skytala_button);
             this.flowLayoutPanel2.Controls.Add(this.caesar_button);
             this.flowLayoutPanel2.Controls.Add(this.polybius_button);
-            this.flowLayoutPanel2.Controls.Add(this.button5);
-            this.flowLayoutPanel2.Controls.Add(this.button6);
             this.flowLayoutPanel2.Controls.Add(this.alberti_button);
             this.flowLayoutPanel2.Controls.Add(this.gronsfeild_button);
+            this.flowLayoutPanel2.Controls.Add(this.vigenere_button);
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -111,36 +109,27 @@
             this.polybius_button.UseVisualStyleBackColor = true;
             this.polybius_button.Click += new System.EventHandler(this.polybius_button_Click);
             // 
-            // button5
-            // 
-            this.button5.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button5.Location = new System.Drawing.Point(3, 295);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(133, 67);
-            this.button5.TabIndex = 0;
-            this.button5.Text = "Шифр Кардано";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button6.Location = new System.Drawing.Point(3, 368);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(133, 67);
-            this.button6.TabIndex = 0;
-            this.button6.Text = "Шифр Ришелье";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
             // alberti_button
             // 
             this.alberti_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.alberti_button.Location = new System.Drawing.Point(3, 441);
+            this.alberti_button.Location = new System.Drawing.Point(3, 295);
             this.alberti_button.Name = "alberti_button";
             this.alberti_button.Size = new System.Drawing.Size(133, 67);
             this.alberti_button.TabIndex = 1;
             this.alberti_button.Text = "Диск Альберти";
             this.alberti_button.UseVisualStyleBackColor = true;
             this.alberti_button.Click += new System.EventHandler(this.alberti_button_Click);
+            // 
+            // gronsfeild_button
+            // 
+            this.gronsfeild_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gronsfeild_button.Location = new System.Drawing.Point(3, 368);
+            this.gronsfeild_button.Name = "gronsfeild_button";
+            this.gronsfeild_button.Size = new System.Drawing.Size(133, 67);
+            this.gronsfeild_button.TabIndex = 4;
+            this.gronsfeild_button.Text = "Шифр Гронсфелда";
+            this.gronsfeild_button.UseVisualStyleBackColor = true;
+            this.gronsfeild_button.Click += new System.EventHandler(this.gronsfeild_button_Click);
             // 
             // textBox1
             // 
@@ -219,16 +208,15 @@
             this.exchange.UseVisualStyleBackColor = true;
             this.exchange.Click += new System.EventHandler(this.exchange_Click);
             // 
-            // gronsfeild_button
+            // vigenere_button
             // 
-            this.gronsfeild_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.gronsfeild_button.Location = new System.Drawing.Point(3, 514);
-            this.gronsfeild_button.Name = "gronsfeild_button";
-            this.gronsfeild_button.Size = new System.Drawing.Size(133, 67);
-            this.gronsfeild_button.TabIndex = 4;
-            this.gronsfeild_button.Text = "Шифр Гронсфелда";
-            this.gronsfeild_button.UseVisualStyleBackColor = true;
-            this.gronsfeild_button.Click += new System.EventHandler(this.gronsfeild_button_Click);
+            this.vigenere_button.Location = new System.Drawing.Point(3, 441);
+            this.vigenere_button.Name = "vigenere_button";
+            this.vigenere_button.Size = new System.Drawing.Size(133, 67);
+            this.vigenere_button.TabIndex = 5;
+            this.vigenere_button.Text = "Шифр Виженера";
+            this.vigenere_button.UseVisualStyleBackColor = true;
+            this.vigenere_button.Click += new System.EventHandler(this.vigenere_button_Click);
             // 
             // Form1
             // 
@@ -264,13 +252,12 @@
         private System.Windows.Forms.Button skytala_button;
         private System.Windows.Forms.Button caesar_button;
         private System.Windows.Forms.Button polybius_button;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button decypher;
         private System.Windows.Forms.Button cypher;
         private System.Windows.Forms.Button alberti_button;
         private System.Windows.Forms.Button exchange;
         private System.Windows.Forms.Button gronsfeild_button;
+        private System.Windows.Forms.Button vigenere_button;
     }
 }
 

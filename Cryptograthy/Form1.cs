@@ -576,6 +576,10 @@ namespace Cryptograthy
             {
                 Gronsfield(Kind.ENCRYPT);
             }
+            else if (PressedButt == vigenere_button)
+            {
+                Vigenere(Kind.ENCRYPT);
+            }
             //ШИФРОВКА
         }
 
@@ -605,6 +609,10 @@ namespace Cryptograthy
             else if (PressedButt == gronsfeild_button)
             {
                 Gronsfield(Kind.DECRYPT);
+            }
+            else if (PressedButt == vigenere_button)
+            {
+                Vigenere(Kind.DECRYPT);
             }
             //РАСШИФРОВКА
         }
@@ -726,6 +734,24 @@ namespace Cryptograthy
             tb.Location = new Point(105, 13);
             tb.Size = new Size(45, 21);
             tb.KeyPress += tb_KeyPress;
+            controls.Add(lb);
+            controls.Add(tb);
+            InitialazePanel();
+        }
+
+        private void vigenere_button_Click(object sender, EventArgs e)
+        {
+            ClearPanel();
+            PressedButt = sender as Button;
+            Label lb = new Label();
+            lb.Location = new Point(5, 16);
+            lb.Text = "Введите ключ: ";
+            lb.Size = new Size(98, 13);
+
+
+            tb = new TextBox();
+            tb.Location = new Point(105, 13);
+            tb.Size = new Size(60, 21);
             controls.Add(lb);
             controls.Add(tb);
             InitialazePanel();
