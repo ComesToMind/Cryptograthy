@@ -13,9 +13,9 @@ using System.IO;
 
 namespace Cryptograthy
 {
-    public partial class Form1 : Form
+    public partial class Kazakevich : Form
     {
-        public Form1()
+        public Kazakevich()
         {
             InitializeComponent();
         }
@@ -580,6 +580,10 @@ namespace Cryptograthy
             {
                 Vigenere(Kind.ENCRYPT);
             }
+            else if (PressedButt == playfair_button)
+            {
+                Playfair();
+            }
             //ШИФРОВКА
         }
 
@@ -613,6 +617,10 @@ namespace Cryptograthy
             else if (PressedButt == vigenere_button)
             {
                 Vigenere(Kind.DECRYPT);
+            }
+            else if (PressedButt == playfair_button)
+            {
+                Playfair();
             }
             //РАСШИФРОВКА
         }
@@ -740,6 +748,24 @@ namespace Cryptograthy
         }
 
         private void vigenere_button_Click(object sender, EventArgs e)
+        {
+            ClearPanel();
+            PressedButt = sender as Button;
+            Label lb = new Label();
+            lb.Location = new Point(5, 16);
+            lb.Text = "Введите ключ: ";
+            lb.Size = new Size(98, 13);
+
+
+            tb = new TextBox();
+            tb.Location = new Point(105, 13);
+            tb.Size = new Size(60, 21);
+            controls.Add(lb);
+            controls.Add(tb);
+            InitialazePanel();
+        }
+
+        private void playfair_button_Click(object sender, EventArgs e)
         {
             ClearPanel();
             PressedButt = sender as Button;

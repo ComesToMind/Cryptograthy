@@ -1,6 +1,6 @@
 ﻿namespace Cryptograthy
 {
-    partial class Form1
+    partial class Kazakevich
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -35,6 +35,7 @@
             this.polybius_button = new System.Windows.Forms.Button();
             this.alberti_button = new System.Windows.Forms.Button();
             this.gronsfeild_button = new System.Windows.Forms.Button();
+            this.vigenere_button = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,7 +44,9 @@
             this.decypher = new System.Windows.Forms.Button();
             this.cypher = new System.Windows.Forms.Button();
             this.exchange = new System.Windows.Forms.Button();
-            this.vigenere_button = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.playfair_button = new System.Windows.Forms.Button();
             this.flowLayoutPanel2.SuspendLayout();
             this.panel_each.SuspendLayout();
             this.SuspendLayout();
@@ -55,9 +58,12 @@
             this.flowLayoutPanel2.Controls.Add(this.skytala_button);
             this.flowLayoutPanel2.Controls.Add(this.caesar_button);
             this.flowLayoutPanel2.Controls.Add(this.polybius_button);
+            this.flowLayoutPanel2.Controls.Add(this.button1);
+            this.flowLayoutPanel2.Controls.Add(this.button2);
             this.flowLayoutPanel2.Controls.Add(this.alberti_button);
             this.flowLayoutPanel2.Controls.Add(this.gronsfeild_button);
             this.flowLayoutPanel2.Controls.Add(this.vigenere_button);
+            this.flowLayoutPanel2.Controls.Add(this.playfair_button);
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -112,7 +118,7 @@
             // alberti_button
             // 
             this.alberti_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.alberti_button.Location = new System.Drawing.Point(3, 295);
+            this.alberti_button.Location = new System.Drawing.Point(3, 441);
             this.alberti_button.Name = "alberti_button";
             this.alberti_button.Size = new System.Drawing.Size(133, 67);
             this.alberti_button.TabIndex = 1;
@@ -123,13 +129,24 @@
             // gronsfeild_button
             // 
             this.gronsfeild_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.gronsfeild_button.Location = new System.Drawing.Point(3, 368);
+            this.gronsfeild_button.Location = new System.Drawing.Point(3, 514);
             this.gronsfeild_button.Name = "gronsfeild_button";
             this.gronsfeild_button.Size = new System.Drawing.Size(133, 67);
             this.gronsfeild_button.TabIndex = 4;
             this.gronsfeild_button.Text = "Шифр Гронсфелда";
             this.gronsfeild_button.UseVisualStyleBackColor = true;
             this.gronsfeild_button.Click += new System.EventHandler(this.gronsfeild_button_Click);
+            // 
+            // vigenere_button
+            // 
+            this.vigenere_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
+            this.vigenere_button.Location = new System.Drawing.Point(3, 587);
+            this.vigenere_button.Name = "vigenere_button";
+            this.vigenere_button.Size = new System.Drawing.Size(133, 67);
+            this.vigenere_button.TabIndex = 5;
+            this.vigenere_button.Text = "Шифр Виженера";
+            this.vigenere_button.UseVisualStyleBackColor = true;
+            this.vigenere_button.Click += new System.EventHandler(this.vigenere_button_Click);
             // 
             // textBox1
             // 
@@ -208,17 +225,40 @@
             this.exchange.UseVisualStyleBackColor = true;
             this.exchange.Click += new System.EventHandler(this.exchange_Click);
             // 
-            // vigenere_button
+            // button1
             // 
-            this.vigenere_button.Location = new System.Drawing.Point(3, 441);
-            this.vigenere_button.Name = "vigenere_button";
-            this.vigenere_button.Size = new System.Drawing.Size(133, 67);
-            this.vigenere_button.TabIndex = 5;
-            this.vigenere_button.Text = "Шифр Виженера";
-            this.vigenere_button.UseVisualStyleBackColor = true;
-            this.vigenere_button.Click += new System.EventHandler(this.vigenere_button_Click);
+            this.button1.Enabled = false;
+            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
+            this.button1.Location = new System.Drawing.Point(3, 295);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(133, 67);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Шифр Кардано";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // button2
+            // 
+            this.button2.Enabled = false;
+            this.button2.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
+            this.button2.Location = new System.Drawing.Point(3, 368);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(133, 67);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "Шифр Ришелье";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // playfair_button
+            // 
+            this.playfair_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
+            this.playfair_button.Location = new System.Drawing.Point(3, 660);
+            this.playfair_button.Name = "playfair_button";
+            this.playfair_button.Size = new System.Drawing.Size(133, 67);
+            this.playfair_button.TabIndex = 8;
+            this.playfair_button.Text = "Шифр Плейфера";
+            this.playfair_button.UseVisualStyleBackColor = true;
+            this.playfair_button.Click += new System.EventHandler(this.playfair_button_Click);
+            // 
+            // Kazakevich
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -231,7 +271,7 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.flowLayoutPanel2);
-            this.Name = "Form1";
+            this.Name = "Kazakevich";
             this.Text = "Form1";
             this.flowLayoutPanel2.ResumeLayout(false);
             this.panel_each.ResumeLayout(false);
@@ -258,6 +298,9 @@
         private System.Windows.Forms.Button exchange;
         private System.Windows.Forms.Button gronsfeild_button;
         private System.Windows.Forms.Button vigenere_button;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button playfair_button;
     }
 }
 

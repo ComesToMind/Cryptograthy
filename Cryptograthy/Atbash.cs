@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cryptograthy
 {
-    partial class Form1
+    partial class Kazakevich
     {
         public void Atbash()
         {

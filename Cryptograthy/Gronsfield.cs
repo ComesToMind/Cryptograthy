@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Cryptograthy
 {
-    partial class Form1
+    partial class Kazakevich
     {
         public void Gronsfield(Kind kind)
         {
