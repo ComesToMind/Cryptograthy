@@ -584,6 +584,10 @@ namespace Cryptograthy
             {
                 Playfair();
             }
+            else if (PressedButt == cardan_button)
+            {
+                Cardano();
+            }
             //ШИФРОВКА
         }
 
@@ -620,7 +624,7 @@ namespace Cryptograthy
             }
             else if (PressedButt == playfair_button)
             {
-                Playfair();
+                PlayfairDecrypt();
             }
             //РАСШИФРОВКА
         }
@@ -780,6 +784,13 @@ namespace Cryptograthy
             tb.Size = new Size(60, 21);
             controls.Add(lb);
             controls.Add(tb);
+            InitialazePanel();
+        }
+
+        private void cardan_button_Click(object sender, EventArgs e)
+        {
+            ClearPanel();
+            PressedButt = sender as Button;
             InitialazePanel();
         }
     }

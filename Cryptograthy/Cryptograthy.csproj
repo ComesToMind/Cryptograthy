@@ -52,6 +52,9 @@
     <Compile Include="Atbash.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Cardano.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Kazakevich.cs">
       <SubType>Form</SubType>
     </Compile>

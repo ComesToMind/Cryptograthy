@@ -33,9 +33,12 @@
             this.skytala_button = new System.Windows.Forms.Button();
             this.caesar_button = new System.Windows.Forms.Button();
             this.polybius_button = new System.Windows.Forms.Button();
+            this.cardan_button = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.alberti_button = new System.Windows.Forms.Button();
             this.gronsfeild_button = new System.Windows.Forms.Button();
             this.vigenere_button = new System.Windows.Forms.Button();
+            this.playfair_button = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,9 +47,6 @@
             this.decypher = new System.Windows.Forms.Button();
             this.cypher = new System.Windows.Forms.Button();
             this.exchange = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.playfair_button = new System.Windows.Forms.Button();
             this.flowLayoutPanel2.SuspendLayout();
             this.panel_each.SuspendLayout();
             this.SuspendLayout();
@@ -58,7 +58,7 @@
             this.flowLayoutPanel2.Controls.Add(this.skytala_button);
             this.flowLayoutPanel2.Controls.Add(this.caesar_button);
             this.flowLayoutPanel2.Controls.Add(this.polybius_button);
-            this.flowLayoutPanel2.Controls.Add(this.button1);
+            this.flowLayoutPanel2.Controls.Add(this.cardan_button);
             this.flowLayoutPanel2.Controls.Add(this.button2);
             this.flowLayoutPanel2.Controls.Add(this.alberti_button);
             this.flowLayoutPanel2.Controls.Add(this.gronsfeild_button);
@@ -115,6 +115,28 @@
             this.polybius_button.UseVisualStyleBackColor = true;
             this.polybius_button.Click += new System.EventHandler(this.polybius_button_Click);
             // 
+            // cardan_button
+            // 
+            this.cardan_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
+            this.cardan_button.Location = new System.Drawing.Point(3, 295);
+            this.cardan_button.Name = "cardan_button";
+            this.cardan_button.Size = new System.Drawing.Size(133, 67);
+            this.cardan_button.TabIndex = 6;
+            this.cardan_button.Text = "Шифр Кардано";
+            this.cardan_button.UseVisualStyleBackColor = true;
+            this.cardan_button.Click += new System.EventHandler(this.cardan_button_Click);
+            // 
+            // button2
+            // 
+            this.button2.Enabled = false;
+            this.button2.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
+            this.button2.Location = new System.Drawing.Point(3, 368);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(133, 67);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "Шифр Ришелье";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // alberti_button
             // 
             this.alberti_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -148,8 +170,20 @@
             this.vigenere_button.UseVisualStyleBackColor = true;
             this.vigenere_button.Click += new System.EventHandler(this.vigenere_button_Click);
             // 
+            // playfair_button
+            // 
+            this.playfair_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
+            this.playfair_button.Location = new System.Drawing.Point(3, 660);
+            this.playfair_button.Name = "playfair_button";
+            this.playfair_button.Size = new System.Drawing.Size(133, 67);
+            this.playfair_button.TabIndex = 8;
+            this.playfair_button.Text = "Шифр Плейфера";
+            this.playfair_button.UseVisualStyleBackColor = true;
+            this.playfair_button.Click += new System.EventHandler(this.playfair_button_Click);
+            // 
             // textBox1
             // 
+            this.textBox1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox1.Location = new System.Drawing.Point(185, 58);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
@@ -158,6 +192,7 @@
             // 
             // textBox2
             // 
+            this.textBox2.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
             this.textBox2.Location = new System.Drawing.Point(497, 58);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
@@ -225,39 +260,6 @@
             this.exchange.UseVisualStyleBackColor = true;
             this.exchange.Click += new System.EventHandler(this.exchange_Click);
             // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
-            this.button1.Location = new System.Drawing.Point(3, 295);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 67);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Шифр Кардано";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Enabled = false;
-            this.button2.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
-            this.button2.Location = new System.Drawing.Point(3, 368);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(133, 67);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Шифр Ришелье";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // playfair_button
-            // 
-            this.playfair_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
-            this.playfair_button.Location = new System.Drawing.Point(3, 660);
-            this.playfair_button.Name = "playfair_button";
-            this.playfair_button.Size = new System.Drawing.Size(133, 67);
-            this.playfair_button.TabIndex = 8;
-            this.playfair_button.Text = "Шифр Плейфера";
-            this.playfair_button.UseVisualStyleBackColor = true;
-            this.playfair_button.Click += new System.EventHandler(this.playfair_button_Click);
-            // 
             // Kazakevich
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -298,7 +300,7 @@
         private System.Windows.Forms.Button exchange;
         private System.Windows.Forms.Button gronsfeild_button;
         private System.Windows.Forms.Button vigenere_button;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cardan_button;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button playfair_button;
     }
