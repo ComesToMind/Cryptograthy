@@ -299,7 +299,7 @@ namespace Cryptograthy
             //приводим все нижний регистр 
             for (int i = 0; i < flagInit.Length; i++)
             {
-                if (Char.IsUpper(flagInit[i]))
+                if (Char.IsLetter(flagInit[i]) &&Char.IsUpper(flagInit[i]))
                 {
                     flagInit[i] = Char.ToLower(flagInit[i]);
                 }

@@ -34,7 +34,7 @@
             this.caesar_button = new System.Windows.Forms.Button();
             this.polybius_button = new System.Windows.Forms.Button();
             this.cardan_button = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.richelieu_button = new System.Windows.Forms.Button();
             this.alberti_button = new System.Windows.Forms.Button();
             this.gronsfeild_button = new System.Windows.Forms.Button();
             this.vigenere_button = new System.Windows.Forms.Button();
@@ -59,7 +59,7 @@
             this.flowLayoutPanel2.Controls.Add(this.caesar_button);
             this.flowLayoutPanel2.Controls.Add(this.polybius_button);
             this.flowLayoutPanel2.Controls.Add(this.cardan_button);
-            this.flowLayoutPanel2.Controls.Add(this.button2);
+            this.flowLayoutPanel2.Controls.Add(this.richelieu_button);
             this.flowLayoutPanel2.Controls.Add(this.alberti_button);
             this.flowLayoutPanel2.Controls.Add(this.gronsfeild_button);
             this.flowLayoutPanel2.Controls.Add(this.vigenere_button);
@@ -117,6 +117,7 @@
             // 
             // cardan_button
             // 
+            this.flowLayoutPanel2.SetFlowBreak(this.cardan_button, true);
             this.cardan_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
             this.cardan_button.Location = new System.Drawing.Point(3, 295);
             this.cardan_button.Name = "cardan_button";
@@ -126,16 +127,16 @@
             this.cardan_button.UseVisualStyleBackColor = true;
             this.cardan_button.Click += new System.EventHandler(this.cardan_button_Click);
             // 
-            // button2
+            // richelieu_button
             // 
-            this.button2.Enabled = false;
-            this.button2.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
-            this.button2.Location = new System.Drawing.Point(3, 368);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(133, 67);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Шифр Ришелье";
-            this.button2.UseVisualStyleBackColor = true;
+            this.richelieu_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
+            this.richelieu_button.Location = new System.Drawing.Point(3, 368);
+            this.richelieu_button.Name = "richelieu_button";
+            this.richelieu_button.Size = new System.Drawing.Size(133, 67);
+            this.richelieu_button.TabIndex = 7;
+            this.richelieu_button.Text = "Шифр Ришелье";
+            this.richelieu_button.UseVisualStyleBackColor = true;
+            this.richelieu_button.Click += new System.EventHandler(this.richelieu_button_Click);
             // 
             // alberti_button
             // 
@@ -301,7 +302,7 @@
         private System.Windows.Forms.Button gronsfeild_button;
         private System.Windows.Forms.Button vigenere_button;
         private System.Windows.Forms.Button cardan_button;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button richelieu_button;
         private System.Windows.Forms.Button playfair_button;
     }
 }
