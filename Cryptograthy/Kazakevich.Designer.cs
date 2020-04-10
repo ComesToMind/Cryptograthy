@@ -47,6 +47,7 @@
             this.decypher = new System.Windows.Forms.Button();
             this.cypher = new System.Windows.Forms.Button();
             this.exchange = new System.Windows.Forms.Button();
+            this.vername_button = new System.Windows.Forms.Button();
             this.flowLayoutPanel2.SuspendLayout();
             this.panel_each.SuspendLayout();
             this.SuspendLayout();
@@ -64,6 +65,7 @@
             this.flowLayoutPanel2.Controls.Add(this.gronsfeild_button);
             this.flowLayoutPanel2.Controls.Add(this.vigenere_button);
             this.flowLayoutPanel2.Controls.Add(this.playfair_button);
+            this.flowLayoutPanel2.Controls.Add(this.vername_button);
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -261,6 +263,17 @@
             this.exchange.UseVisualStyleBackColor = true;
             this.exchange.Click += new System.EventHandler(this.exchange_Click);
             // 
+            // vername_button
+            // 
+            this.vername_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
+            this.vername_button.Location = new System.Drawing.Point(3, 733);
+            this.vername_button.Name = "vername_button";
+            this.vername_button.Size = new System.Drawing.Size(133, 67);
+            this.vername_button.TabIndex = 9;
+            this.vername_button.Text = "Шифр Вернама";
+            this.vername_button.UseVisualStyleBackColor = true;
+            this.vername_button.Click += new System.EventHandler(this.vername_button_Click);
+            // 
             // Kazakevich
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -304,6 +317,7 @@
         private System.Windows.Forms.Button cardan_button;
         private System.Windows.Forms.Button richelieu_button;
         private System.Windows.Forms.Button playfair_button;
+        private System.Windows.Forms.Button vername_button;
     }
 }
 

@@ -82,6 +82,9 @@
     <Compile Include="Skytala.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Vername.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Vigenere.cs">
       <SubType>Form</SubType>
     </Compile>

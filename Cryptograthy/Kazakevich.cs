@@ -60,10 +60,14 @@ namespace Cryptograthy
                     e.Handled = true;
                 }
             }
-
-
-
-
+        }
+        private void tb_RechelieuPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 32 && number != 40 && number != 41 && number != 44 && number!=8)
+            {
+                e.Handled = true;
+            }
         }
 
 
@@ -116,6 +120,14 @@ namespace Cryptograthy
             {
                 CardanEncrypt();
             }
+            else if (PressedButt == richelieu_button)
+            {
+                RichelieuEncrypt();
+            }
+            else if (PressedButt == vername_button)
+            {
+                Vername();
+            }
             //ШИФРОВКА
         }
 
@@ -158,6 +170,15 @@ namespace Cryptograthy
             {
                 CardanDecrypt();
             }
+            else if (PressedButt == richelieu_button)
+            {
+                RichelieuDecrypt();
+            }
+            else if (PressedButt == vername_button)
+            {
+                Vername();
+            }
+            
             //РАСШИФРОВКА
         }
 
@@ -327,6 +348,25 @@ namespace Cryptograthy
         }
 
         private void richelieu_button_Click(object sender, EventArgs e)
+        {
+            ClearPanel();
+            PressedButt = sender as Button;
+            Label lb = new Label();
+            lb.Location = new Point(5, 55);
+            lb.Text = "Введите ключ: ";
+            lb.Size = new Size(98, 13);
+
+
+            tb = new TextBox();
+            tb.Location = new Point(105, 50);
+            tb.Size = new Size(300, 21);
+            tb.KeyPress += tb_RechelieuPress;
+            controls.Add(lb);
+            controls.Add(tb);
+            InitialazePanel();
+        }
+
+        private void vername_button_Click(object sender, EventArgs e)
         {
             ClearPanel();
             PressedButt = sender as Button;
