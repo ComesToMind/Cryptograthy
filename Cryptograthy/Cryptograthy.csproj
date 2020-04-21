@@ -89,6 +89,9 @@
     <Compile Include="Vigenere.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="XOR_cipher.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <EmbeddedResource Include="Kazakevich.resx">
       <DependentUpon>Kazakevich.cs</DependentUpon>
     </EmbeddedResource>

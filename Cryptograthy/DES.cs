@@ -191,7 +191,7 @@ namespace Cryptograthy
                 {
                     if (reader.PeekChar() == -1)
                     {
-                        InitDataBlock[i] = 0x80;
+                        InitDataBlock[i] = 0x00;
                         i++;
                         while (i < 8)
                         {
