@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Cryptograthy;
 
 //using static Cryptograthy.Innitial;
 
@@ -18,6 +19,7 @@ namespace Cryptograthy
         {
             InitializeComponent();
         }
+        public DES des = new DES();
         //обернуть в класс
         string rus = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
         string RUS = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
@@ -381,6 +383,76 @@ namespace Cryptograthy
             tb.Size = new Size(300, 21);
             controls.Add(lb);
             controls.Add(tb);
+            InitialazePanel();
+        }
+
+        private void des_button_Click(object sender, EventArgs e)
+        {
+            ClearPanel();
+            PressedButt = sender as Button;
+
+            //this.des_button.Click += new System.EventHandler(this.des_button_Click);
+            // 
+            // generate_key_button
+            // 
+            Button generate_key_button = new Button();
+            generate_key_button.Location = new System.Drawing.Point(136, 40);
+            generate_key_button.Name = "generate_key_button";
+            generate_key_button.Size = new System.Drawing.Size(96, 39);
+            generate_key_button.TabIndex = 2;
+            generate_key_button.Text = "Сгенерировать \r\nключ";
+            generate_key_button.UseVisualStyleBackColor = true;
+            generate_key_button.Click += new EventHandler(des.Generate_Each_Round_Keys);
+            // 
+            // crypt_file_button
+            // 
+            Button crypt_file_button = new Button();
+            crypt_file_button.Location = new System.Drawing.Point(238, 40);
+            crypt_file_button.Name = "crypt_file_button";
+            crypt_file_button.Size = new System.Drawing.Size(91, 39);
+            crypt_file_button.TabIndex = 3;
+            crypt_file_button.Text = "Зашифровать файл";
+            crypt_file_button.UseVisualStyleBackColor = true;
+            crypt_file_button.Click += new EventHandler(des.FileEncrypt);
+            
+            // 
+            // decrypt_file_button
+            // 
+            Button decrypt_file_button = new Button();
+            decrypt_file_button.Location = new System.Drawing.Point(335, 40);
+            decrypt_file_button.Name = "decrypt_file_button";
+            decrypt_file_button.Size = new System.Drawing.Size(99, 39);
+            decrypt_file_button.TabIndex = 4;
+            decrypt_file_button.Text = "Расшифровать файл";
+            decrypt_file_button.UseVisualStyleBackColor = true;
+            decrypt_file_button.Click += new EventHandler(des.FileDecrypt);
+            // 
+            // paste_key_button
+            //
+            Button paste_key_button = new Button();
+            paste_key_button.Location = new System.Drawing.Point(136, 90);
+            paste_key_button.Name = "paste_key_button";
+            paste_key_button.Size = new System.Drawing.Size(96, 29);
+            paste_key_button.TabIndex = 5;
+            paste_key_button.Text = "Задать ключ";
+            paste_key_button.UseVisualStyleBackColor = true;
+
+            // 
+            // keyTextBox
+            // 
+            TextBox keyTextBox = new TextBox();
+
+            keyTextBox.Location = new System.Drawing.Point(238, 95);
+            keyTextBox.Name = "keyTextBox";
+            keyTextBox.Size = new System.Drawing.Size(196, 20);
+            keyTextBox.TabIndex = 6;
+
+            controls.Add(generate_key_button);
+            controls.Add(crypt_file_button);
+            controls.Add(decrypt_file_button);
+            controls.Add(paste_key_button);
+            controls.Add(keyTextBox);
+
             InitialazePanel();
         }
     }

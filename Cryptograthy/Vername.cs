@@ -10,6 +10,7 @@ namespace Cryptograthy
     {
         public void Vername()
         {
+            //функция шифрования и расшифрования
             char[] first_data = textBox1.Text.ToCharArray();
             char[] flagInit = null;
             foreach (Control ctrl in controls)
@@ -44,13 +45,13 @@ namespace Cryptograthy
                 int eng_fl = eng.IndexOf(Char.ToLower(flagInit[i]));
                 if (rus_sym != -1 && rus_fl != -1)
                 {
-                    first_data[i] = rus[rus_sym^rus_fl%rus.Length]; //XOR 
+                    first_data[i] = rus[(rus_sym^rus_fl)%rus.Length]; //XOR 
                 }
                 else
                 {
                     if (eng_sym != -1 && eng_fl != -1)
                     {
-                        first_data[i] = eng[eng_sym ^ eng_fl % eng.Length];//XOR
+                        first_data[i] = eng[(eng_sym ^ eng_fl) % eng.Length];//XOR
                     }
                     else
                     {

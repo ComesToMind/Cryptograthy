@@ -39,6 +39,8 @@
             this.gronsfeild_button = new System.Windows.Forms.Button();
             this.vigenere_button = new System.Windows.Forms.Button();
             this.playfair_button = new System.Windows.Forms.Button();
+            this.vername_button = new System.Windows.Forms.Button();
+            this.des_button = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -47,7 +49,6 @@
             this.decypher = new System.Windows.Forms.Button();
             this.cypher = new System.Windows.Forms.Button();
             this.exchange = new System.Windows.Forms.Button();
-            this.vername_button = new System.Windows.Forms.Button();
             this.flowLayoutPanel2.SuspendLayout();
             this.panel_each.SuspendLayout();
             this.SuspendLayout();
@@ -66,16 +67,17 @@
             this.flowLayoutPanel2.Controls.Add(this.vigenere_button);
             this.flowLayoutPanel2.Controls.Add(this.playfair_button);
             this.flowLayoutPanel2.Controls.Add(this.vername_button);
+            this.flowLayoutPanel2.Controls.Add(this.des_button);
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(149, 484);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(156, 484);
             this.flowLayoutPanel2.TabIndex = 1;
             this.flowLayoutPanel2.WrapContents = false;
             // 
             // atbash_button
             // 
-            this.atbash_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.atbash_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.atbash_button.Location = new System.Drawing.Point(3, 3);
             this.atbash_button.Name = "atbash_button";
             this.atbash_button.Size = new System.Drawing.Size(133, 67);
@@ -86,7 +88,7 @@
             // 
             // skytala_button
             // 
-            this.skytala_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.skytala_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.skytala_button.Location = new System.Drawing.Point(3, 76);
             this.skytala_button.Name = "skytala_button";
             this.skytala_button.Size = new System.Drawing.Size(133, 67);
@@ -97,7 +99,7 @@
             // 
             // caesar_button
             // 
-            this.caesar_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.caesar_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.caesar_button.Location = new System.Drawing.Point(3, 149);
             this.caesar_button.Name = "caesar_button";
             this.caesar_button.Size = new System.Drawing.Size(133, 67);
@@ -108,7 +110,7 @@
             // 
             // polybius_button
             // 
-            this.polybius_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.polybius_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.polybius_button.Location = new System.Drawing.Point(3, 222);
             this.polybius_button.Name = "polybius_button";
             this.polybius_button.Size = new System.Drawing.Size(133, 67);
@@ -120,7 +122,7 @@
             // cardan_button
             // 
             this.flowLayoutPanel2.SetFlowBreak(this.cardan_button, true);
-            this.cardan_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
+            this.cardan_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.cardan_button.Location = new System.Drawing.Point(3, 295);
             this.cardan_button.Name = "cardan_button";
             this.cardan_button.Size = new System.Drawing.Size(133, 67);
@@ -131,7 +133,7 @@
             // 
             // richelieu_button
             // 
-            this.richelieu_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
+            this.richelieu_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.richelieu_button.Location = new System.Drawing.Point(3, 368);
             this.richelieu_button.Name = "richelieu_button";
             this.richelieu_button.Size = new System.Drawing.Size(133, 67);
@@ -142,7 +144,7 @@
             // 
             // alberti_button
             // 
-            this.alberti_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.alberti_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.alberti_button.Location = new System.Drawing.Point(3, 441);
             this.alberti_button.Name = "alberti_button";
             this.alberti_button.Size = new System.Drawing.Size(133, 67);
@@ -153,7 +155,7 @@
             // 
             // gronsfeild_button
             // 
-            this.gronsfeild_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gronsfeild_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.gronsfeild_button.Location = new System.Drawing.Point(3, 514);
             this.gronsfeild_button.Name = "gronsfeild_button";
             this.gronsfeild_button.Size = new System.Drawing.Size(133, 67);
@@ -164,7 +166,7 @@
             // 
             // vigenere_button
             // 
-            this.vigenere_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
+            this.vigenere_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.vigenere_button.Location = new System.Drawing.Point(3, 587);
             this.vigenere_button.Name = "vigenere_button";
             this.vigenere_button.Size = new System.Drawing.Size(133, 67);
@@ -175,7 +177,7 @@
             // 
             // playfair_button
             // 
-            this.playfair_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
+            this.playfair_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.playfair_button.Location = new System.Drawing.Point(3, 660);
             this.playfair_button.Name = "playfair_button";
             this.playfair_button.Size = new System.Drawing.Size(133, 67);
@@ -184,9 +186,31 @@
             this.playfair_button.UseVisualStyleBackColor = true;
             this.playfair_button.Click += new System.EventHandler(this.playfair_button_Click);
             // 
+            // vername_button
+            // 
+            this.vername_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.vername_button.Location = new System.Drawing.Point(3, 733);
+            this.vername_button.Name = "vername_button";
+            this.vername_button.Size = new System.Drawing.Size(133, 67);
+            this.vername_button.TabIndex = 9;
+            this.vername_button.Text = "Шифр Вернама";
+            this.vername_button.UseVisualStyleBackColor = true;
+            this.vername_button.Click += new System.EventHandler(this.vername_button_Click);
+            // 
+            // des_button
+            // 
+            this.des_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.des_button.Location = new System.Drawing.Point(3, 806);
+            this.des_button.Name = "des_button";
+            this.des_button.Size = new System.Drawing.Size(133, 67);
+            this.des_button.TabIndex = 10;
+            this.des_button.Text = "DES";
+            this.des_button.UseVisualStyleBackColor = true;
+            this.des_button.Click += new System.EventHandler(this.des_button_Click);
+            // 
             // textBox1
             // 
-            this.textBox1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(185, 58);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
@@ -195,7 +219,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
+            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.textBox2.Location = new System.Drawing.Point(497, 58);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
@@ -205,20 +229,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.label1.Location = new System.Drawing.Point(260, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 18);
+            this.label1.Size = new System.Drawing.Size(101, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "Исходный текст";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.label2.Location = new System.Drawing.Point(583, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(149, 18);
+            this.label2.Size = new System.Drawing.Size(142, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Зашифрованный текст";
             // 
@@ -235,6 +259,7 @@
             // 
             // decypher
             // 
+            this.decypher.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.decypher.Location = new System.Drawing.Point(293, 11);
             this.decypher.Name = "decypher";
             this.decypher.Size = new System.Drawing.Size(99, 23);
@@ -245,9 +270,10 @@
             // 
             // cypher
             // 
-            this.cypher.Location = new System.Drawing.Point(199, 11);
+            this.cypher.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cypher.Location = new System.Drawing.Point(194, 11);
             this.cypher.Name = "cypher";
-            this.cypher.Size = new System.Drawing.Size(88, 23);
+            this.cypher.Size = new System.Drawing.Size(93, 23);
             this.cypher.TabIndex = 0;
             this.cypher.Text = " Зашифровать";
             this.cypher.UseVisualStyleBackColor = true;
@@ -262,17 +288,6 @@
             this.exchange.Text = "<--";
             this.exchange.UseVisualStyleBackColor = true;
             this.exchange.Click += new System.EventHandler(this.exchange_Click);
-            // 
-            // vername_button
-            // 
-            this.vername_button.Font = new System.Drawing.Font("Comic Sans MS", 9.75F);
-            this.vername_button.Location = new System.Drawing.Point(3, 733);
-            this.vername_button.Name = "vername_button";
-            this.vername_button.Size = new System.Drawing.Size(133, 67);
-            this.vername_button.TabIndex = 9;
-            this.vername_button.Text = "Шифр Вернама";
-            this.vername_button.UseVisualStyleBackColor = true;
-            this.vername_button.Click += new System.EventHandler(this.vername_button_Click);
             // 
             // Kazakevich
             // 
@@ -318,6 +333,7 @@
         private System.Windows.Forms.Button richelieu_button;
         private System.Windows.Forms.Button playfair_button;
         private System.Windows.Forms.Button vername_button;
+        private System.Windows.Forms.Button des_button;
     }
 }
 

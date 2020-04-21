@@ -58,6 +58,7 @@
     <Compile Include="Cardano.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DES.cs" />
     <Compile Include="Kazakevich.cs">
       <SubType>Form</SubType>
     </Compile>
