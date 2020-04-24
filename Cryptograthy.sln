@@ -7,7 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cryptograthy", "Cryptograth
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FA975B80-A24D-450A-8164-CD961AF4E9E4}"
 	ProjectSection(SolutionItems) = preProject
-		Cryptograthy\Crypttext.txt = Cryptograthy\Crypttext.txt
 		Cryptograthy\bin\Release\Output.txt = Cryptograthy\bin\Release\Output.txt
 	EndProjectSection
 EndProject

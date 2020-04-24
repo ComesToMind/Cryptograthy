@@ -7,12 +7,16 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace Cryptograthy
 {
-    public class DES
+    public partial class Kazakevich
     {
         ///---------------------------
+        ///
+          
+        
         int[,] IP = { { 58, 50, 42, 34, 26, 18, 10, 2 },
                       { 60, 52, 44, 36, 28, 20, 12, 4 },
                       { 62, 54, 46, 38, 30, 22, 14, 6 },
@@ -112,21 +116,21 @@ namespace Cryptograthy
         ///---------------------------
         //сразу перменная под 16 раундовых ключей
         BitArray[] Keys = new BitArray[16];
-
-        static string strkey = "DESkey2";
+        BitArray Key;
+        //BitArray Key = new BitArray(Encoding.ASCII.GetBytes(strkey.ToCharArray()));
+        //static string strkey = "DESkey2";
         //static int[] myInts = new int[2] { 2147455533, 2132343564 };
-        BitArray Key = new BitArray(Encoding.ASCII.GetBytes(strkey.ToCharArray()));
         
-        public void FileEncrypt(object sender, EventArgs e)
+        public void DesFileEncrypt(object sender, EventArgs e)
         {
             //зашифрованный текст по  битам храним в листе
             LinkedList<byte> EncryptedData = new LinkedList<byte>();
 
             //читаем бинарно файл
-
-            FileInfo InfFile = new FileInfo("Output.txt");
+            OpenFileDialog read = new OpenFileDialog();
+            //FileInfo InfFile = new FileInfo(read.FileName);
             
-            BinaryReader reader = new BinaryReader(File.Open("Output.txt", FileMode.Open),
+            BinaryReader reader = new BinaryReader(File.Open(read.FileName, FileMode.Open),
                                                                           Encoding.Default);
             byte[] InitDataBlock = new byte[8]; //64 бита
             byte[] EncryptDataBlock = new byte[8]; //64 бита
@@ -171,46 +175,51 @@ namespace Cryptograthy
 
 
         }
-        public void FileDecrypt(object sender, EventArgs e)
+
+        public void DesFileDecrypt(object sender, EventArgs e)
         {
             //зашифрованный текст по  битам храним в листе
             LinkedList<byte> EncryptedData = new LinkedList<byte>();
 
             //читаем бинарно файл
 
-            FileInfo InfFile = new FileInfo("Crypttext.txt");
-
-            BinaryReader reader = new BinaryReader(File.Open("Crypttext.txt", FileMode.Open),
-                                                                          Encoding.Default);
-            byte[] InitDataBlock = new byte[8]; //64 бита
-            byte[] EncryptDataBlock = new byte[8]; //64 бита
-
-            while (reader.PeekChar() > -1)
+            OpenFileDialog read = new OpenFileDialog();
+            //FileInfo InfFile = new FileInfo(read.FileName);
+            if (read.ShowDialog() == DialogResult.OK)
             {
-                for (int i = 0; i < 8; i++)
+                BinaryReader reader = new BinaryReader(File.Open(read.FileName, FileMode.Open),
+                                                                          Encoding.Default);
+                byte[] InitDataBlock = new byte[8]; //64 бита
+                byte[] EncryptDataBlock = new byte[8]; //64 бита
+
+                while (reader.PeekChar() > -1)
                 {
-                    if (reader.PeekChar() == -1)
+                    for (int i = 0; i < 8; i++)
                     {
-                        InitDataBlock[i] = 0x00;
-                        i++;
-                        while (i < 8)
+                        if (reader.PeekChar() == -1)
                         {
                             InitDataBlock[i] = 0x00;
                             i++;
+                            while (i < 8)
+                            {
+                                InitDataBlock[i] = 0x00;
+                                i++;
+                            }
+                            break;
                         }
-                        break;
+                        InitDataBlock[i] = reader.ReadByte();//добавить возможность чтения по 8 байт сразу     
                     }
-                    InitDataBlock[i] = reader.ReadByte();//добавить возможность чтения по 8 байт сразу     
-                }
-                CryptDes(InitDataBlock, ref EncryptDataBlock, 'D');
-                foreach (var b in EncryptDataBlock)
-                {
-                    EncryptedData.AddLast(b);
+                    CryptDes(InitDataBlock, ref EncryptDataBlock, 'D');
+                    foreach (var b in EncryptDataBlock)
+                    {
+                        EncryptedData.AddLast(b);
+                    }
+
                 }
 
+                reader.Close();
             }
-
-            reader.Close();
+                
             SaveFileDialog Save = new SaveFileDialog();
             if (Save.ShowDialog() == DialogResult.OK)
             {
@@ -414,7 +423,7 @@ namespace Cryptograthy
         }
 
         //функция генерации раундовых ключей 
-        public void Generate_Each_Round_Keys(object sender, EventArgs e)
+        public void DesGenerate_Each_Round_Keys(/*object sender, EventArgs e*/)
         {
             BitArray BigEndianKey = new BitArray(64);
             int index = 0;
@@ -463,16 +472,78 @@ namespace Cryptograthy
             }
 
         }
-
-        private void DecryptDEs()
+        public static byte[] StringToByteArray(String hex)
         {
+            int NumberChars = hex.Length;
+            byte[] bytes = new byte[NumberChars / 2];
+            for (int i = 0; i < NumberChars; i += 2)
+                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            return bytes;
+        }
+
+        public void DesReadKey(object sender, EventArgs e)
+        { 
+            foreach (Control ctrl in controls)
+            {
+                if (ctrl.TabIndex == 6)
+                {
+                    TextBox cmb = (TextBox)ctrl;
+                    if (cmb.Text != null && !cmb.Text.Equals(""))
+                    {
+                        if (cmb.TextLength != 14)
+                        {
+                            MessageBox.Show("Размер ключа должен быть равен 7", "Некорректные данные");
+                            return;
+                        }
+                        string pattern = @"[0-9A-F]{14}";
+                        if (Regex.IsMatch(cmb.Text, pattern))
+                        {
+                            byte[] bytes = StringToByteArray(cmb.Text);
+                            Key = new BitArray(bytes);
+                            DesGenerate_Each_Round_Keys();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Неправильный формат ключа", "Некорректные данные");
+                            return;
+                        }
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Неправильное значение ключа", "Некорректные данные");
+                        return;
+                    }
+                    break;
+
+                }
+
+            }
 
         }
 
+        private void DesGenerate_Innit_Key(object sender, EventArgs e)
+        {
+            Random rand = new Random(DateTimeOffset.Now.Millisecond);
+            byte[] KeyB = new byte[7];
+            rand.NextBytes(KeyB);
+            //сразу можно шифровать
+            //не забыть активировать кнопки
+            Key = new BitArray(KeyB);
+            DesGenerate_Each_Round_Keys();
+            //вывести на экран 
+            foreach (Control ctrl in controls)
+            {
+                if (ctrl.TabIndex == 6)
+                {
+                    TextBox cmb = (TextBox)ctrl;
+                    cmb.Text = BitConverter.ToString(KeyB).Replace("-","");
+                    //cmb.Text = Encoding.ASCII.GetString(KeyB);
 
 
-
-       
+                }
+            }
+        }
 
     }
 }
