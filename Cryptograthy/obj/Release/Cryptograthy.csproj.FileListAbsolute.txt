@@ -8,3 +8,4 @@ C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Release\Cryptog
 C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Release\Cryptograthy.pdb
 C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Release\Cryptograthy.csprojAssemblyReference.cache
 C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Release\Cryptograthy.Kazakevich.resources
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Release\Cryptograthy.DESDialog.resources

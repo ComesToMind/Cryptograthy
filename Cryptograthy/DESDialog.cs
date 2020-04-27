@@ -1,21 +1,29 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.IO;
-using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using System.Collections;
+using System.IO;
 
 namespace Cryptograthy
 {
-    public partial class Kazakevich
+    public partial class DESDialog : Form
     {
-        ///---------------------------
-        ///
-        ProgressBar pg;
+        public DESDialog()
+        {
+            InitializeComponent();
+            crypt_file_button.Enabled = false;
+            decrypt_file_button.Enabled = false;
+            button1.Enabled = false;
+            button2.Enabled = false;
+            ECB_butt.Select();
+        }
 
         int[,] IP = { { 58, 50, 42, 34, 26, 18, 10, 2 },
                       { 60, 52, 44, 36, 28, 20, 12, 4 },
@@ -43,7 +51,7 @@ namespace Cryptograthy
                      20, 21, 22, 23, 24, 25 ,
                      24, 25, 26, 27, 28, 29,
                      28, 29, 30, 31, 32, 1 };
-                       
+
         int[] P = {  16, 7, 20, 21 ,
                       29, 12, 28, 17 ,
                       1, 15, 23, 26 ,
@@ -120,7 +128,7 @@ namespace Cryptograthy
         //BitArray Key = new BitArray(Encoding.ASCII.GetBytes(strkey.ToCharArray()));
         //static string strkey = "DESkey2";
         //static int[] myInts = new int[2] { 2147455533, 2132343564 };
-        
+
         public void DesFileEncrypt(object sender, EventArgs e)
         {
             //зашифрованный текст по  битам храним в листе
@@ -130,72 +138,77 @@ namespace Cryptograthy
             OpenFileDialog read = new OpenFileDialog();
             if (read.ShowDialog() == DialogResult.OK)
             {
+                label1.Text = "";
+                label1.Update();
                 FileInfo InfFile = new FileInfo(read.FileName);
-                foreach (Control ctrl in controls)
-                {
-                    if (ctrl.TabIndex == 8)
-                    {
-                        pg = (ProgressBar)ctrl;
-                        pg.Maximum = Convert.ToInt32(InfFile.Length / 8)+8;
-                        pg.Value = 0;
-                        
-                    }
-                }
-             BinaryReader reader = new BinaryReader(File.Open(read.FileName, FileMode.Open),
-                                                                          Encoding.Default);
-            byte[] InitDataBlock = new byte[8]; //64 бита
-            byte[] EncryptDataBlock = new byte[8]; //64 бита
 
-            while (reader.PeekChar() > -1)
-            {
-                for (int i = 0; i < 8; i++)
+                pb.Maximum = Convert.ToInt32(InfFile.Length / 8) + 8;
+                pb.Value = 0;
+
+
+                BinaryReader reader = new BinaryReader(File.Open(read.FileName, FileMode.Open),
+                                                                             Encoding.Default);
+                byte[] InitDataBlock = new byte[8]; //64 бита
+                byte[] EncryptDataBlock = new byte[8]; //64 бита
+
+                while (reader.PeekChar() > -1)
                 {
-                    if(reader.PeekChar() == -1)
+                    for (int i = 0; i < 8; i++)
                     {
-                        InitDataBlock[i] = 0x00;
-                        i++;
-                        while (i < 8)
+                        if (reader.PeekChar() == -1)
                         {
                             InitDataBlock[i] = 0x00;
                             i++;
+                            while (i < 8)
+                            {
+                                InitDataBlock[i] = 0x00;
+                                i++;
+                            }
+                            break;
                         }
-                        break;
+                        InitDataBlock[i] = reader.ReadByte();//добавить возможность чтения по 8 байт сразу     
                     }
-                    InitDataBlock[i] = reader.ReadByte();//добавить возможность чтения по 8 байт сразу     
-                }
-                CryptDes(InitDataBlock, ref EncryptDataBlock, 'E');
-                foreach(var b in EncryptDataBlock)
-                {
-                    EncryptedData.AddLast(b);
-                }
-                    pg.Value++;
-                
-            }
+                    CryptDes(InitDataBlock, ref EncryptDataBlock, 'E');
+                    foreach (var b in EncryptDataBlock)
+                    {
+                        EncryptedData.AddLast(b);
+                    }
+                    pb.Value++;
 
-            reader.Close();
-            
+                }
+
+                reader.Close();
+                label1.Text = "Готово";
+                pb.Value = 0;
+
+
             }
             SaveFileDialog Save = new SaveFileDialog();
             if (Save.ShowDialog() == DialogResult.OK)
             {
-                pg.Value = 0;
-                pg.Maximum = EncryptedData.Count;
+                label1.Text = "";
+                label1.Update();
+                pb.Value = 0;
+                pb.Maximum = EncryptedData.Count;
                 BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.OpenOrCreate), Encoding.Default);
                 foreach (var b in EncryptedData)
                 {
                     writer.Write(b);
-                    pg.Value++;
+                    pb.Value++;
                 }
                 writer.Close();
-                pg.Value = 0;
+                pb.Value = 0;
+                label1.Text = "Готово";
+
             }
-            
+
 
 
         }
 
         public void DesFileDecrypt(object sender, EventArgs e)
         {
+            
             //зашифрованный текст по  битам храним в листе
             LinkedList<byte> EncryptedData = new LinkedList<byte>();
             //читаем бинарно файл
@@ -203,6 +216,12 @@ namespace Cryptograthy
             //FileInfo InfFile = new FileInfo(read.FileName);
             if (read.ShowDialog() == DialogResult.OK)
             {
+                label1.Text = "";
+                label1.Update();
+                FileInfo InfFile = new FileInfo(read.FileName);
+
+                pb.Maximum = Convert.ToInt32(InfFile.Length / 8) + 1;
+                pb.Value = 0;
                 BinaryReader reader = new BinaryReader(File.Open(read.FileName, FileMode.Open),
                                                                           Encoding.Default);
                 byte[] InitDataBlock = new byte[8]; //64 бита
@@ -230,21 +249,30 @@ namespace Cryptograthy
                     {
                         EncryptedData.AddLast(b);
                     }
+                    pb.Value++;
 
                 }
-
+                label1.Text = "Готово";
                 reader.Close();
+                pb.Value = 0;
             }
-                
+
             SaveFileDialog Save = new SaveFileDialog();
             if (Save.ShowDialog() == DialogResult.OK)
             {
+                label1.Text = "";
+                label1.Update();
+                pb.Value = 0;
+                pb.Maximum = EncryptedData.Count;
                 BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.OpenOrCreate), Encoding.Default);
                 foreach (var b in EncryptedData)
                 {
+                    pb.Value++;
                     writer.Write(b);
                 }
                 writer.Close();
+                pb.Value = 0;
+                label1.Text = "Готово";
             }
         }
 
@@ -303,9 +331,9 @@ namespace Cryptograthy
             //финальная перестановка
             for (int i = 0; i < 64; i++)
             {
-                tempBitInitBlock[i] = IBitDataBlock[IP_1[i]-1];
+                tempBitInitBlock[i] = IBitDataBlock[IP_1[i] - 1];
             }
-            
+
 
             EncryptDataBlock = Convert_Bits_To_Bites(tempBitInitBlock);
         }
@@ -324,7 +352,7 @@ namespace Cryptograthy
                 }
             }
             byte[] bytes = new byte[8];
-             FinalCryptBitArray.CopyTo(bytes, 0);
+            FinalCryptBitArray.CopyTo(bytes, 0);
             return bytes;
         }
         private void Feistel(ref BitArray L0, ref BitArray R0)
@@ -334,7 +362,7 @@ namespace Cryptograthy
             for (int round = 0; round < 16; round++)
             {
                 Li = R0;
-                Ri = L0.Xor(f(R0,round));
+                Ri = L0.Xor(f(R0, round));
                 R0 = Ri;
                 L0 = Li;
 
@@ -344,10 +372,10 @@ namespace Cryptograthy
         {
             BitArray Li = new BitArray(32);
             BitArray Ri = new BitArray(32);
-            for (int round = 15; round >=0; round--)
+            for (int round = 15; round >= 0; round--)
             {
                 Ri = L16;
-                Li = R16.Xor(f(L16,round));
+                Li = R16.Xor(f(L16, round));
                 R16 = Ri;
                 L16 = Li;
             }
@@ -369,23 +397,23 @@ namespace Cryptograthy
             int[] bit6_to_bit4 = null;
             BitArray TempResult = new BitArray(32);
 
-            for(int i = 0; i < 48;i+=6)
+            for (int i = 0; i < 48; i += 6)
             {
                 //последний и первый
-                int a = (E_R0[i] ? 1 : 0) *2
-                      + (E_R0[i+5] ? 1 : 0);
+                int a = (E_R0[i] ? 1 : 0) * 2
+                      + (E_R0[i + 5] ? 1 : 0);
                 //четыре посредине
-                int b =   (E_R0[i + 1] ? 1 : 0) *8
-                        + (E_R0[i + 2] ? 1 : 0) *4
-                        + (E_R0[i + 3] ? 1 : 0) *2
+                int b = (E_R0[i + 1] ? 1 : 0) * 8
+                        + (E_R0[i + 2] ? 1 : 0) * 4
+                        + (E_R0[i + 3] ? 1 : 0) * 2
                         + (E_R0[i + 4] ? 1 : 0);
 
                 switch (iteration)
                 {
-                    
+
                     case 1:
-                        bit6_to_bit4 = Convert_Int_To_Bites(S1[a,b]);
-                        break; 
+                        bit6_to_bit4 = Convert_Int_To_Bites(S1[a, b]);
+                        break;
                     case 2:
                         bit6_to_bit4 = Convert_Int_To_Bites(S2[a, b]);
                         break;
@@ -420,7 +448,7 @@ namespace Cryptograthy
             BitArray FinalResult = new BitArray(32);
             for (int i = 0; i < 32; i++)
             {
-                FinalResult[i] = TempResult[P[i]-1];
+                FinalResult[i] = TempResult[P[i] - 1];
             }
             return FinalResult;
         }
@@ -498,42 +526,36 @@ namespace Cryptograthy
         }
 
         public void DesReadKey(object sender, EventArgs e)
-        { 
-            foreach (Control ctrl in controls)
+        {
+            if (keyTextBox.Text != null && !keyTextBox.Text.Equals(""))
             {
-                if (ctrl.TabIndex == 6)
+                if (keyTextBox.TextLength != 14)
                 {
-                    TextBox cmb = (TextBox)ctrl;
-                    if (cmb.Text != null && !cmb.Text.Equals(""))
-                    {
-                        if (cmb.TextLength != 14)
-                        {
-                            MessageBox.Show("Размер ключа должен быть равен 7", "Некорректные данные");
-                            return;
-                        }
-                        string pattern = @"[0-9A-F]{14}";
-                        if (Regex.IsMatch(cmb.Text, pattern))
-                        {
-                            byte[] bytes = StringToByteArray(cmb.Text);
-                            Key = new BitArray(bytes);
-                            DesGenerate_Each_Round_Keys();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Неправильный формат ключа", "Некорректные данные");
-                            return;
-                        }
-                        
-                    }
-                    else
-                    {
-                        MessageBox.Show("Неправильное значение ключа", "Некорректные данные");
-                        return;
-                    }
-                    break;
-
+                    MessageBox.Show("Размер ключа должен быть равен 7", "Некорректные данные");
+                    return;
+                }
+                string pattern = @"[0-9A-F]{14}";
+                if (Regex.IsMatch(keyTextBox.Text, pattern))
+                {
+                    byte[] bytes = StringToByteArray(keyTextBox.Text);
+                    Key = new BitArray(bytes);
+                    DesGenerate_Each_Round_Keys();
+                    crypt_file_button.Enabled = true;
+                    decrypt_file_button.Enabled = true;
+                    button1.Enabled = true;
+                    button2.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Неправильный формат ключа", "Некорректные данные");
+                    return;
                 }
 
+            }
+            else
+            {
+                MessageBox.Show("Неправильное значение ключа", "Некорректные данные");
+                return;
             }
 
         }
@@ -548,16 +570,18 @@ namespace Cryptograthy
             Key = new BitArray(KeyB);
             DesGenerate_Each_Round_Keys();
             //вывести на экран 
-            foreach (Control ctrl in controls)
-            {
-                if (ctrl.TabIndex == 6)
-                {
-                    TextBox cmb = (TextBox)ctrl;
-                    cmb.Text = BitConverter.ToString(KeyB).Replace("-","");
-                    //cmb.Text = Encoding.ASCII.GetString(KeyB);
-                }
-            }
-        }
 
+
+            keyTextBox.Text = BitConverter.ToString(KeyB).Replace("-", "");
+            crypt_file_button.Enabled = true;
+            decrypt_file_button.Enabled = true;
+            button1.Enabled = true;
+            button2.Enabled = true;
+            //cmb.Text = Encoding.ASCII.GetString(KeyB);
+
+        }
     }
+
+
 }
+
