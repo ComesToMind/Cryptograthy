@@ -446,7 +446,7 @@ namespace Cryptograthy
 
             keyTextBox.Location = new System.Drawing.Point(238, 95);
             keyTextBox.Name = "keyTextBox";
-            keyTextBox.Size = new System.Drawing.Size(196, 20);
+            keyTextBox.Size = new System.Drawing.Size(110, 20);
             keyTextBox.TabIndex = 6;
             keyTextBox.MaxLength = 14;
 
@@ -457,12 +457,20 @@ namespace Cryptograthy
             lb.TabIndex = 7;
             lb.Text = "Формат ключа - 7 байт слитно - 1A2B3C4D9E6F70";
 
+            ProgressBar pb = new ProgressBar();
+            pb.Location = new Point(380, 95);
+            pb.Name = "pb";
+            pb.Size = new Size(160, 20);
+            pb.TabIndex = 8;
+            pb.Maximum = 1000;
+
             controls.Add(generate_key_button);
             controls.Add(crypt_file_button);
             controls.Add(decrypt_file_button);
             controls.Add(paste_key_button);
             controls.Add(keyTextBox);
             controls.Add(lb);
+            controls.Add(pb);
 
             InitialazePanel();
         }

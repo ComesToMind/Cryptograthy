@@ -15,8 +15,8 @@ namespace Cryptograthy
     {
         ///---------------------------
         ///
-          
-        
+        ProgressBar pg;
+
         int[,] IP = { { 58, 50, 42, 34, 26, 18, 10, 2 },
                       { 60, 52, 44, 36, 28, 20, 12, 4 },
                       { 62, 54, 46, 38, 30, 22, 14, 6 },
@@ -128,9 +128,20 @@ namespace Cryptograthy
 
             //читаем бинарно файл
             OpenFileDialog read = new OpenFileDialog();
-            //FileInfo InfFile = new FileInfo(read.FileName);
-            
-            BinaryReader reader = new BinaryReader(File.Open(read.FileName, FileMode.Open),
+            if (read.ShowDialog() == DialogResult.OK)
+            {
+                FileInfo InfFile = new FileInfo(read.FileName);
+                foreach (Control ctrl in controls)
+                {
+                    if (ctrl.TabIndex == 8)
+                    {
+                        pg = (ProgressBar)ctrl;
+                        pg.Maximum = Convert.ToInt32(InfFile.Length / 8)+8;
+                        pg.Value = 0;
+                        
+                    }
+                }
+             BinaryReader reader = new BinaryReader(File.Open(read.FileName, FileMode.Open),
                                                                           Encoding.Default);
             byte[] InitDataBlock = new byte[8]; //64 бита
             byte[] EncryptDataBlock = new byte[8]; //64 бита
@@ -141,7 +152,7 @@ namespace Cryptograthy
                 {
                     if(reader.PeekChar() == -1)
                     {
-                        InitDataBlock[i] = 0x80;
+                        InitDataBlock[i] = 0x00;
                         i++;
                         while (i < 8)
                         {
@@ -157,21 +168,28 @@ namespace Cryptograthy
                 {
                     EncryptedData.AddLast(b);
                 }
+                    pg.Value++;
                 
             }
 
             reader.Close();
+            
+            }
             SaveFileDialog Save = new SaveFileDialog();
             if (Save.ShowDialog() == DialogResult.OK)
             {
+                pg.Value = 0;
+                pg.Maximum = EncryptedData.Count;
                 BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.OpenOrCreate), Encoding.Default);
                 foreach (var b in EncryptedData)
                 {
                     writer.Write(b);
+                    pg.Value++;
                 }
                 writer.Close();
+                pg.Value = 0;
             }
-
+            
 
 
         }
@@ -180,9 +198,7 @@ namespace Cryptograthy
         {
             //зашифрованный текст по  битам храним в листе
             LinkedList<byte> EncryptedData = new LinkedList<byte>();
-
             //читаем бинарно файл
-
             OpenFileDialog read = new OpenFileDialog();
             //FileInfo InfFile = new FileInfo(read.FileName);
             if (read.ShowDialog() == DialogResult.OK)
@@ -539,8 +555,6 @@ namespace Cryptograthy
                     TextBox cmb = (TextBox)ctrl;
                     cmb.Text = BitConverter.ToString(KeyB).Replace("-","");
                     //cmb.Text = Encoding.ASCII.GetString(KeyB);
-
-
                 }
             }
         }
