@@ -24,6 +24,7 @@ namespace Cryptograthy
             button2.Enabled = false;
             ECB_butt.Select();
         }
+        byte[] CO_CBC = Encoding.ASCII.GetBytes("DESkey28");
 
         int[,] IP = { { 58, 50, 42, 34, 26, 18, 10, 2 },
                       { 60, 52, 44, 36, 28, 20, 12, 4 },
@@ -125,6 +126,11 @@ namespace Cryptograthy
         //сразу перменная под 16 раундовых ключей
         BitArray[] Keys = new BitArray[16];
         BitArray Key;
+
+        //C0 для CBC 
+         //string strkey = "DESkey2";
+
+
         //BitArray Key = new BitArray(Encoding.ASCII.GetBytes(strkey.ToCharArray()));
         //static string strkey = "DESkey2";
         //static int[] myInts = new int[2] { 2147455533, 2132343564 };
@@ -168,7 +174,24 @@ namespace Cryptograthy
                         }
                         InitDataBlock[i] = reader.ReadByte();//добавить возможность чтения по 8 байт сразу     
                     }
-                    CryptDes(InitDataBlock, ref EncryptDataBlock, 'E');
+
+                    if (ECB_butt.Checked)
+                    {
+                        CryptDes(InitDataBlock, ref EncryptDataBlock, 'E');
+                    }
+                    if (CBC_butt.Checked)
+                    {
+                        CBC(InitDataBlock, ref EncryptDataBlock, 'E');
+                    }
+                    if (CFB_butt.Checked)
+                    {
+                        CFB(InitDataBlock, ref EncryptDataBlock, 'E');
+                    }
+                    if (OFB_butt.Checked)
+                    {
+                        OFB(InitDataBlock, ref EncryptDataBlock, 'E');
+                    }
+
                     foreach (var b in EncryptDataBlock)
                     {
                         EncryptedData.AddLast(b);
@@ -182,24 +205,27 @@ namespace Cryptograthy
                 pb.Value = 0;
 
 
-            }
-            SaveFileDialog Save = new SaveFileDialog();
-            if (Save.ShowDialog() == DialogResult.OK)
-            {
-                label1.Text = "";
-                label1.Update();
-                pb.Value = 0;
-                pb.Maximum = EncryptedData.Count;
-                BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.OpenOrCreate), Encoding.Default);
-                foreach (var b in EncryptedData)
-                {
-                    writer.Write(b);
-                    pb.Value++;
-                }
-                writer.Close();
-                pb.Value = 0;
-                label1.Text = "Готово";
+                //возвращаем начальное C0_CBC
+                CO_CBC = Encoding.ASCII.GetBytes("DESkey28");
 
+                SaveFileDialog Save = new SaveFileDialog();
+                if (Save.ShowDialog() == DialogResult.OK)
+                {
+                    label1.Text = "";
+                    label1.Update();
+                    pb.Value = 0;
+                    pb.Maximum = EncryptedData.Count;
+                    BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.OpenOrCreate), Encoding.Default);
+                    foreach (var b in EncryptedData)
+                    {
+                        writer.Write(b);
+                        pb.Value++;
+                    }
+                    writer.Close();
+                    pb.Value = 0;
+                    label1.Text = "Готово";
+
+                }
             }
 
 
@@ -244,7 +270,24 @@ namespace Cryptograthy
                         }
                         InitDataBlock[i] = reader.ReadByte();//добавить возможность чтения по 8 байт сразу     
                     }
-                    CryptDes(InitDataBlock, ref EncryptDataBlock, 'D');
+
+                    if (ECB_butt.Checked)
+                    {
+                        CryptDes(InitDataBlock, ref EncryptDataBlock, 'D');
+                    }
+                    if (CBC_butt.Checked)
+                    {
+                        CBC(InitDataBlock, ref EncryptDataBlock, 'D');
+                    }
+                    if (CFB_butt.Checked)
+                    {
+                        CFB(InitDataBlock, ref EncryptDataBlock, 'D');
+                    }
+                    if (OFB_butt.Checked)
+                    {
+                        OFB(InitDataBlock, ref EncryptDataBlock, 'D');
+                    }
+
                     foreach (var b in EncryptDataBlock)
                     {
                         EncryptedData.AddLast(b);
@@ -255,27 +298,114 @@ namespace Cryptograthy
                 label1.Text = "Готово";
                 reader.Close();
                 pb.Value = 0;
+                //возвращаем начальное C0_CBC
+                CO_CBC = Encoding.ASCII.GetBytes("DESkey28");
+
+                SaveFileDialog Save = new SaveFileDialog();
+                if (Save.ShowDialog() == DialogResult.OK)
+                {
+                    label1.Text = "";
+                    label1.Update();
+                    pb.Value = 0;
+                    pb.Maximum = EncryptedData.Count;
+                    BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.OpenOrCreate), Encoding.Default);
+                    foreach (var b in EncryptedData)
+                    {
+                        pb.Value++;
+                        writer.Write(b);
+                    }
+                    writer.Close();
+                    pb.Value = 0;
+                    label1.Text = "Готово";
+                }
             }
 
-            SaveFileDialog Save = new SaveFileDialog();
-            if (Save.ShowDialog() == DialogResult.OK)
-            {
-                label1.Text = "";
-                label1.Update();
-                pb.Value = 0;
-                pb.Maximum = EncryptedData.Count;
-                BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.OpenOrCreate), Encoding.Default);
-                foreach (var b in EncryptedData)
-                {
-                    pb.Value++;
-                    writer.Write(b);
-                }
-                writer.Close();
-                pb.Value = 0;
-                label1.Text = "Готово";
-            }
         }
 
+        private  void CBC(byte[] InitDataBlock, ref byte[] EncryptDataBlock, char mode)
+        {
+            if (mode == 'E')
+            {
+                //сначала складываем текст с С0, потом шифруем ключом
+                for (int i = 0; i < InitDataBlock.Length; i++)
+                {
+                    InitDataBlock[i] ^= CO_CBC[i];
+                }
+                CryptDes(InitDataBlock, ref EncryptDataBlock, mode);
+                //запоминаем С0 для следубщей итерации (текущий зашифров блок)
+                Array.Copy(EncryptDataBlock, CO_CBC, 8);
+
+            }
+            else
+            {
+                //расшифровали потом только сложили с С0
+                //
+                CryptDes(InitDataBlock, ref EncryptDataBlock, mode);
+                for (int i = 0; i < EncryptDataBlock.Length; i++)
+                {
+                    EncryptDataBlock[i] ^= CO_CBC[i];
+                }
+                Array.Copy(InitDataBlock, CO_CBC,8);
+                //С0_CBC = InitDataBlock;
+                //запоминаем С0 для следующей итерации (исходный текст шифротекста)
+
+            }
+                
+        }
+        private  void CFB(byte[] InitDataBlock, ref byte[] EncryptDataBlock, char mode)
+        {
+            if (mode == 'E')
+            {
+                //шифруем вектор инициализации
+                CryptDes(CO_CBC , ref EncryptDataBlock, mode);
+                //скалдываем зашифр вектр с откр текстом
+                for (int i = 0; i < InitDataBlock.Length; i++)
+                {
+                    EncryptDataBlock[i] ^= InitDataBlock[i];
+                }
+                Array.Copy(EncryptDataBlock, CO_CBC, 8);
+
+            }
+            else
+            {
+                CryptDes(CO_CBC, ref EncryptDataBlock, mode);
+                //скалдываем зашифр вектр с откр текстом
+                for (int i = 0; i < InitDataBlock.Length; i++)
+                {
+                    EncryptDataBlock[i] ^= InitDataBlock[i];
+                }
+                Array.Copy(InitDataBlock, CO_CBC, 8);
+
+            }
+        }
+        private  void OFB(byte[] InitDataBlock, ref byte[] EncryptDataBlock, char mode)
+        {
+            if (mode == 'E')
+            {
+                //шифруем вектор инициализации
+                CryptDes(CO_CBC, ref EncryptDataBlock, mode);
+                Array.Copy(EncryptDataBlock, CO_CBC, 8);
+
+                //скалдываем зашифр вектр с откр текстом
+                for (int i = 0; i < InitDataBlock.Length; i++)
+                {
+                    EncryptDataBlock[i] ^= InitDataBlock[i];
+                }
+
+            }
+            else
+            {
+                //шифруем вектор инициализации
+                CryptDes(CO_CBC, ref EncryptDataBlock, mode);
+                Array.Copy(InitDataBlock, CO_CBC, 8);
+                //скалдываем зашифр вектр с откр текстом
+                for (int i = 0; i < InitDataBlock.Length; i++)
+                {
+                    EncryptDataBlock[i] ^= InitDataBlock[i];
+                }
+
+            }
+        }
         public void CryptDes(byte[] InitDataBlock, ref byte[] EncryptDataBlock, char mode)
         {
             //преобразуем байты в биты 
@@ -294,7 +424,6 @@ namespace Cryptograthy
                     index++;
                 }
             }
-
             //делим на две части по 32 бита
             //и сразу деалем начлаьную перестановку
             BitArray L0 = new BitArray(32);
@@ -579,6 +708,116 @@ namespace Cryptograthy
             button2.Enabled = true;
             //cmb.Text = Encoding.ASCII.GetString(KeyB);
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LinkedList<byte> EncryptedData = new LinkedList<byte>();
+
+            char[] first_data = textBox1.Text.ToCharArray();
+            byte[] bytes;
+            if (first_data.Length % 8 != 0)
+            {
+                bytes = new byte[first_data.Length + (8 - first_data.Length % 8)];
+                Array.Copy(Encoding.Default.GetBytes(first_data), bytes, first_data.Length);
+            }
+            else
+            {
+                bytes = Encoding.Default.GetBytes(first_data);
+            }
+
+
+            int place = 0;
+            byte[] InitDataBlock = new byte[8]; //64 бита
+            byte[] EncryptDataBlock = new byte[8]; //64 бита
+
+            while (place < bytes.Length)
+            {
+                for (int i = 0; i < 8 ; i++)
+                {
+                    InitDataBlock[i] = bytes[place];
+                    place++;
+                }
+
+                if (ECB_butt.Checked)
+                {
+                    CryptDes(InitDataBlock, ref EncryptDataBlock, 'E');
+                }
+                if (CBC_butt.Checked)
+                {
+                    CBC(InitDataBlock, ref EncryptDataBlock, 'E');
+                }
+                if (CFB_butt.Checked)
+                {
+                    CFB(InitDataBlock, ref EncryptDataBlock, 'E');
+                }
+                if (OFB_butt.Checked)
+                {
+                    OFB(InitDataBlock, ref EncryptDataBlock, 'E');
+                }
+                foreach (var b in EncryptDataBlock)
+                {
+                    EncryptedData.AddLast(b);
+                }
+
+            }
+            
+            textBox2.Text = Encoding.Default.GetString(EncryptedData.ToArray());
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            LinkedList<byte> EncryptedData = new LinkedList<byte>();
+
+            char[] first_data = textBox2.Text.ToCharArray();
+            byte[] bytes;
+            if (first_data.Length % 8 != 0)
+            {
+                bytes = new byte[first_data.Length + (8 - first_data.Length % 8)];
+                Array.Copy(Encoding.Default.GetBytes(first_data), bytes, first_data.Length);
+            }
+            else
+            {
+                bytes = Encoding.Default.GetBytes(first_data);
+            }
+
+
+            int place = 0;
+            byte[] InitDataBlock = new byte[8]; //64 бита
+            byte[] EncryptDataBlock = new byte[8]; //64 бита
+            while (place < bytes.Length)
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    InitDataBlock[i] = bytes[place];
+                    place++;
+                }
+
+                if (ECB_butt.Checked)
+                {
+                    CryptDes(InitDataBlock, ref EncryptDataBlock, 'D');
+                }
+                if (CBC_butt.Checked)
+                {
+                    CBC(InitDataBlock, ref EncryptDataBlock, 'D');
+                }
+                if (CFB_butt.Checked)
+                {
+                    CFB(InitDataBlock, ref EncryptDataBlock, 'D');
+                }
+                if (OFB_butt.Checked)
+                {
+                    OFB(InitDataBlock, ref EncryptDataBlock, 'D');
+                }
+                foreach (var b in EncryptDataBlock)
+                {
+                    EncryptedData.AddLast(b);
+                }
+
+            }
+
+            textBox2.Text = Encoding.Default.GetString(EncryptedData.ToArray());
         }
     }
 

@@ -38,13 +38,14 @@
             this.lb = new System.Windows.Forms.Label();
             this.pb = new System.Windows.Forms.ProgressBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ECB_butt = new System.Windows.Forms.RadioButton();
-            this.CBC_butt = new System.Windows.Forms.RadioButton();
-            this.CFB_butt = new System.Windows.Forms.RadioButton();
             this.OFB_butt = new System.Windows.Forms.RadioButton();
+            this.CFB_butt = new System.Windows.Forms.RadioButton();
+            this.CBC_butt = new System.Windows.Forms.RadioButton();
+            this.ECB_butt = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -140,27 +141,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Режим работы";
             // 
-            // ECB_butt
+            // OFB_butt
             // 
-            this.ECB_butt.AutoSize = true;
-            this.ECB_butt.Location = new System.Drawing.Point(6, 20);
-            this.ECB_butt.Name = "ECB_butt";
-            this.ECB_butt.Size = new System.Drawing.Size(46, 17);
-            this.ECB_butt.TabIndex = 0;
-            this.ECB_butt.TabStop = true;
-            this.ECB_butt.Text = "ECB";
-            this.ECB_butt.UseVisualStyleBackColor = true;
-            // 
-            // CBC_butt
-            // 
-            this.CBC_butt.AutoSize = true;
-            this.CBC_butt.Location = new System.Drawing.Point(6, 43);
-            this.CBC_butt.Name = "CBC_butt";
-            this.CBC_butt.Size = new System.Drawing.Size(46, 17);
-            this.CBC_butt.TabIndex = 1;
-            this.CBC_butt.TabStop = true;
-            this.CBC_butt.Text = "CBC";
-            this.CBC_butt.UseVisualStyleBackColor = true;
+            this.OFB_butt.AutoSize = true;
+            this.OFB_butt.Location = new System.Drawing.Point(6, 89);
+            this.OFB_butt.Name = "OFB_butt";
+            this.OFB_butt.Size = new System.Drawing.Size(46, 17);
+            this.OFB_butt.TabIndex = 3;
+            this.OFB_butt.TabStop = true;
+            this.OFB_butt.Text = "OFB";
+            this.OFB_butt.UseVisualStyleBackColor = true;
             // 
             // CFB_butt
             // 
@@ -173,16 +163,27 @@
             this.CFB_butt.Text = "CFB";
             this.CFB_butt.UseVisualStyleBackColor = true;
             // 
-            // OFB_butt
+            // CBC_butt
             // 
-            this.OFB_butt.AutoSize = true;
-            this.OFB_butt.Location = new System.Drawing.Point(6, 89);
-            this.OFB_butt.Name = "OFB_butt";
-            this.OFB_butt.Size = new System.Drawing.Size(46, 17);
-            this.OFB_butt.TabIndex = 3;
-            this.OFB_butt.TabStop = true;
-            this.OFB_butt.Text = "OFB";
-            this.OFB_butt.UseVisualStyleBackColor = true;
+            this.CBC_butt.AutoSize = true;
+            this.CBC_butt.Location = new System.Drawing.Point(6, 43);
+            this.CBC_butt.Name = "CBC_butt";
+            this.CBC_butt.Size = new System.Drawing.Size(46, 17);
+            this.CBC_butt.TabIndex = 1;
+            this.CBC_butt.TabStop = true;
+            this.CBC_butt.Text = "CBC";
+            this.CBC_butt.UseVisualStyleBackColor = true;
+            // 
+            // ECB_butt
+            // 
+            this.ECB_butt.AutoSize = true;
+            this.ECB_butt.Location = new System.Drawing.Point(6, 20);
+            this.ECB_butt.Name = "ECB_butt";
+            this.ECB_butt.Size = new System.Drawing.Size(46, 17);
+            this.ECB_butt.TabIndex = 0;
+            this.ECB_butt.TabStop = true;
+            this.ECB_butt.Text = "ECB";
+            this.ECB_butt.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -192,6 +193,7 @@
             this.button1.TabIndex = 10;
             this.button1.Text = "Защифровать";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -201,6 +203,7 @@
             this.button2.TabIndex = 11;
             this.button2.Text = "Дешифровать";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 
@@ -210,11 +213,21 @@
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 12;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(276, 53);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(238, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Некоторые символы могут не отображаться!";
+            // 
             // DESDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -256,5 +269,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
