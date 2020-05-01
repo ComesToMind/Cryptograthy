@@ -22,9 +22,11 @@ namespace Cryptograthy
             decrypt_file_button.Enabled = false;
             button1.Enabled = false;
             button2.Enabled = false;
+            button3.Enabled = false;
             ECB_butt.Select();
         }
         byte[] CO_CBC = Encoding.ASCII.GetBytes("DESkey28");
+        LinkedList<byte> textB2Helper;
 
         int[,] IP = { { 58, 50, 42, 34, 26, 18, 10, 2 },
                       { 60, 52, 44, 36, 28, 20, 12, 4 },
@@ -774,6 +776,8 @@ namespace Cryptograthy
                 textBox2.Text += v;
             }
             textBox2.Update();
+            textB2Helper = EncryptedData;
+            button3.Enabled = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -827,7 +831,7 @@ namespace Cryptograthy
                 }
 
             }
-
+            
             char[] symbols = Encoding.Default.GetChars(EncryptedData.ToArray());
             textBox2.Clear();
             foreach (var v in symbols)
@@ -835,6 +839,28 @@ namespace Cryptograthy
                 textBox2.Text += v;
             }
             textBox2.Update();
+           
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (textBox2.TextLength != 0 && textB2Helper.Count != 0)
+            {
+                SaveFileDialog Save = new SaveFileDialog();
+                if (Save.ShowDialog() == DialogResult.OK)
+                {
+                   
+                    BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.Create), Encoding.Default);
+                    foreach (var b in textB2Helper)
+                    {
+                        writer.Write(b);
+                    }
+                    writer.Close();
+                    
+                    label1.Text = "Готово";
+
+                }
+            }
         }
     }
 
