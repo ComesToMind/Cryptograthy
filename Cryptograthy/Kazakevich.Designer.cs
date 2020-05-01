@@ -50,6 +50,7 @@
             this.decypher = new System.Windows.Forms.Button();
             this.cypher = new System.Windows.Forms.Button();
             this.exchange = new System.Windows.Forms.Button();
+            this.crypt_label = new System.Windows.Forms.Label();
             this.flowLayoutPanel2.SuspendLayout();
             this.panel_each.SuspendLayout();
             this.SuspendLayout();
@@ -261,6 +262,7 @@
             // 
             // panel_each
             // 
+            this.panel_each.Controls.Add(this.crypt_label);
             this.panel_each.Controls.Add(this.decypher);
             this.panel_each.Controls.Add(this.cypher);
             this.panel_each.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -302,6 +304,15 @@
             this.exchange.UseVisualStyleBackColor = true;
             this.exchange.Click += new System.EventHandler(this.exchange_Click);
             // 
+            // crypt_label
+            // 
+            this.crypt_label.AutoSize = true;
+            this.crypt_label.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.crypt_label.Location = new System.Drawing.Point(459, 17);
+            this.crypt_label.Name = "crypt_label";
+            this.crypt_label.Size = new System.Drawing.Size(0, 17);
+            this.crypt_label.TabIndex = 4;
+            // 
             // Kazakevich
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -319,6 +330,7 @@
             this.Text = "Form1";
             this.flowLayoutPanel2.ResumeLayout(false);
             this.panel_each.ResumeLayout(false);
+            this.panel_each.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -348,6 +360,7 @@
         private System.Windows.Forms.Button des_button;
         private System.Windows.Forms.Button xor_cipher_button;
         public System.Windows.Forms.Panel panel_each;
+        private System.Windows.Forms.Label crypt_label;
     }
 }
 

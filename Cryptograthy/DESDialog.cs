@@ -761,9 +761,13 @@ namespace Cryptograthy
                 }
 
             }
-            
-            textBox2.Text = Encoding.Default.GetString(EncryptedData.ToArray());
-
+            char [] symbols = Encoding.Default.GetChars(EncryptedData.ToArray());
+            textBox2.Clear();
+            foreach (var v in symbols)
+            {
+                textBox2.Text += v;
+            }
+            textBox2.Update();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -817,7 +821,13 @@ namespace Cryptograthy
 
             }
 
-            textBox2.Text = Encoding.Default.GetString(EncryptedData.ToArray());
+            char[] symbols = Encoding.Default.GetChars(EncryptedData.ToArray());
+            textBox2.Clear();
+            foreach (var v in symbols)
+            {
+                textBox2.Text += v;
+            }
+            textBox2.Update();
         }
     }
 

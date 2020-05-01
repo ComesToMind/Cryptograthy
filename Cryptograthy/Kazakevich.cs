@@ -129,7 +129,7 @@ namespace Cryptograthy
             }
             else if (PressedButt == vername_button)
             {
-                Vername();
+                Vername(Kind.ENCRYPT);
             }
             //ШИФРОВКА
         }
@@ -179,7 +179,7 @@ namespace Cryptograthy
             }
             else if (PressedButt == vername_button)
             {
-                Vername();
+                Vername(Kind.DECRYPT);
             }
             
             //РАСШИФРОВКА
@@ -396,36 +396,8 @@ namespace Cryptograthy
 
         private void xor_cipher_button_Click(object sender, EventArgs e)
         {
-            ClearPanel();
-            PressedButt = sender as Button;
-
-            //this.des_button.Click += new System.EventHandler(this.des_button_Click);
-            // 
-            // generate_key_button
-            // 
-
-            Button read_key_button = new Button();
-            read_key_button.Location = new System.Drawing.Point(136, 40);
-            read_key_button.Name = "read_key_button";
-            read_key_button.Size = new System.Drawing.Size(96, 39);
-            read_key_button.TabIndex = 2;
-            read_key_button.Text = "Считать ключ \r\nключ";
-            read_key_button.UseVisualStyleBackColor = true;
-            //generate_key_button.Click += new EventHandler(des.Generate_Each_Round_Keys);
-            //
-
-
-            Button save_key_button = new Button();
-            save_key_button.Location = new System.Drawing.Point(238, 40);
-            save_key_button.Name = "save_key_button";
-            save_key_button.Size = new System.Drawing.Size(91, 39);
-            save_key_button.TabIndex = 3;
-            save_key_button.Text = "Сохранить ключ";
-            save_key_button.UseVisualStyleBackColor = true;
-            //save_key_button.Click += new EventHandler(des.FileEncrypt);
-            controls.Add(read_key_button);
-            controls.Add(save_key_button);
-            InitialazePanel();
+            var form = new XORDialog();
+            form.ShowDialog();
 
         }
     }

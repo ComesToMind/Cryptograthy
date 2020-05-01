@@ -8,10 +8,20 @@ namespace Cryptograthy
 {
     partial class Kazakevich
     {
-        public void Vername()
+        public void Vername(Kind k)
         {
             //функция шифрования и расшифрования
-            char[] first_data = textBox1.Text.ToCharArray();
+            char[] first_data;
+            if (k == Kind.ENCRYPT)
+            {
+                first_data = textBox1.Text.ToCharArray();
+
+            }
+            else
+            {
+
+                first_data = textBox2.Text.Replace(@"\0","\0").ToCharArray();
+            }
             char[] flagInit = null;
             foreach (Control ctrl in controls)
             {
@@ -39,31 +49,40 @@ namespace Cryptograthy
             }
             for (int i = 0; i < first_data.Length; i++)
             {
-                int rus_sym = rus.IndexOf(Char.ToLower(first_data[i]));
-                int rus_fl = rus.IndexOf(Char.ToLower(flagInit[i]));
-                int eng_sym = eng.IndexOf(Char.ToLower(first_data[i]));
-                int eng_fl = eng.IndexOf(Char.ToLower(flagInit[i]));
-                if (rus_sym != -1 && rus_fl != -1)
-                {
-                    first_data[i] = rus[(rus_sym^rus_fl)%rus.Length]; //XOR 
-                }
-                else
-                {
-                    if (eng_sym != -1 && eng_fl != -1)
-                    {
-                        first_data[i] = eng[(eng_sym ^ eng_fl) % eng.Length];//XOR
-                    }
-                    else
-                    {
-                        MessageBox.Show("Несовпадение букв ключа и текста", "Некорректные данные");
-                        return;
-                    }
-                }
-                
+                //int rus_sym = rus.IndexOf(Char.ToLower(first_data[i]));
+                //int rus_fl = rus.IndexOf(Char.ToLower(flagInit[i]));
+                //int eng_sym = eng.IndexOf(Char.ToLower(first_data[i]));
+                //int eng_fl = eng.IndexOf(Char.ToLower(flagInit[i]));
+                //if (rus_sym != -1 && rus_fl != -1)
+                //{
+                //    first_data[i] = rus[(rus_sym^rus_fl)%rus.Length]; //XOR 
+                //}
+                //else
+                //{
+                //    if (eng_sym != -1 && eng_fl != -1)
+                //    {
+                //        first_data[i] = eng[(eng_sym ^ eng_fl) % eng.Length];//XOR
+                //    }
+                //    else
+                //    {
+                //        MessageBox.Show("Несовпадение букв ключа и текста", "Некорректные данные");
+                //        return;
+                //    }
+                //}
+                first_data[i] ^= flagInit[i];
                
             }
-
-            textBox2.Text = new string(first_data);
+            textBox2.Clear();
+            foreach (var v in first_data)
+            {
+                if (v == '\0')
+                {
+                    textBox2.Text += @"\0";
+                }
+                else
+                    textBox2.Text += v;
+            }
+            textBox2.Update();
 
         }
     }
