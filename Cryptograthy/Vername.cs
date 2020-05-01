@@ -49,26 +49,7 @@ namespace Cryptograthy
             }
             for (int i = 0; i < first_data.Length; i++)
             {
-                //int rus_sym = rus.IndexOf(Char.ToLower(first_data[i]));
-                //int rus_fl = rus.IndexOf(Char.ToLower(flagInit[i]));
-                //int eng_sym = eng.IndexOf(Char.ToLower(first_data[i]));
-                //int eng_fl = eng.IndexOf(Char.ToLower(flagInit[i]));
-                //if (rus_sym != -1 && rus_fl != -1)
-                //{
-                //    first_data[i] = rus[(rus_sym^rus_fl)%rus.Length]; //XOR 
-                //}
-                //else
-                //{
-                //    if (eng_sym != -1 && eng_fl != -1)
-                //    {
-                //        first_data[i] = eng[(eng_sym ^ eng_fl) % eng.Length];//XOR
-                //    }
-                //    else
-                //    {
-                //        MessageBox.Show("Несовпадение букв ключа и текста", "Некорректные данные");
-                //        return;
-                //    }
-                //}
+                
                 first_data[i] ^= flagInit[i];
                
             }
@@ -87,3 +68,23 @@ namespace Cryptograthy
         }
     }
 }
+//int rus_sym = rus.IndexOf(Char.ToLower(first_data[i]));
+//int rus_fl = rus.IndexOf(Char.ToLower(flagInit[i]));
+//int eng_sym = eng.IndexOf(Char.ToLower(first_data[i]));
+//int eng_fl = eng.IndexOf(Char.ToLower(flagInit[i]));
+//if (rus_sym != -1 && rus_fl != -1)
+//{
+//    first_data[i] = rus[(rus_sym^rus_fl)%rus.Length]; //XOR 
+//}
+//else
+//{
+//    if (eng_sym != -1 && eng_fl != -1)
+//    {
+//        first_data[i] = eng[(eng_sym ^ eng_fl) % eng.Length];//XOR
+//    }
+//    else
+//    {
+//        MessageBox.Show("Несовпадение букв ключа и текста", "Некорректные данные");
+//        return;
+//    }
+//}

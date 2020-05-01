@@ -7,4 +7,5 @@ C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptogra
 C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.csproj.CoreCompileInputs.cache
 C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.exe
 C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.pdb
-C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.Form1.resources
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.DESDialog.resources
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.Kazakevich.resources

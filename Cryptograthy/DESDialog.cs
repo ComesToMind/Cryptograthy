@@ -138,7 +138,7 @@ namespace Cryptograthy
         public void DesFileEncrypt(object sender, EventArgs e)
         {
             //зашифрованный текст по  битам храним в листе
-            LinkedList<byte> EncryptedData = new LinkedList<byte>();
+             LinkedList<byte> EncryptedData;
 
             //читаем бинарно файл
             OpenFileDialog read = new OpenFileDialog();
@@ -156,8 +156,9 @@ namespace Cryptograthy
                                                                              Encoding.Default);
                 byte[] InitDataBlock = new byte[8]; //64 бита
                 byte[] EncryptDataBlock = new byte[8]; //64 бита
+                EncryptedData = new LinkedList<byte>();
 
-                while (reader.PeekChar() > -1)
+                while ( reader.BaseStream.Position != reader.BaseStream.Length)
                 {
                     for (int i = 0; i < 8; i++)
                     {
@@ -172,7 +173,8 @@ namespace Cryptograthy
                             }
                             break;
                         }
-                        InitDataBlock[i] = reader.ReadByte();//добавить возможность чтения по 8 байт сразу     
+
+                        InitDataBlock[i] = reader.ReadByte();//добавить возможность чтения по 8 байт сразу
                     }
 
                     if (ECB_butt.Checked)
@@ -252,8 +254,9 @@ namespace Cryptograthy
                                                                           Encoding.Default);
                 byte[] InitDataBlock = new byte[8]; //64 бита
                 byte[] EncryptDataBlock = new byte[8]; //64 бита
-
-                while (reader.PeekChar() > -1)
+                CO_CBC = Encoding.ASCII.GetBytes("DESkey28");
+                
+                while (reader.BaseStream.Position != reader.BaseStream.Length)
                 {
                     for (int i = 0; i < 8; i++)
                     {
@@ -266,7 +269,9 @@ namespace Cryptograthy
                                 InitDataBlock[i] = 0x00;
                                 i++;
                             }
+                           
                             break;
+
                         }
                         InitDataBlock[i] = reader.ReadByte();//добавить возможность чтения по 8 байт сразу     
                     }
@@ -357,7 +362,7 @@ namespace Cryptograthy
             if (mode == 'E')
             {
                 //шифруем вектор инициализации
-                CryptDes(CO_CBC , ref EncryptDataBlock, mode);
+                CryptDes(CO_CBC , ref EncryptDataBlock, 'E');
                 //скалдываем зашифр вектр с откр текстом
                 for (int i = 0; i < InitDataBlock.Length; i++)
                 {
@@ -368,7 +373,7 @@ namespace Cryptograthy
             }
             else
             {
-                CryptDes(CO_CBC, ref EncryptDataBlock, mode);
+                CryptDes(CO_CBC, ref EncryptDataBlock, 'E');
                 //скалдываем зашифр вектр с откр текстом
                 for (int i = 0; i < InitDataBlock.Length; i++)
                 {
@@ -383,7 +388,7 @@ namespace Cryptograthy
             if (mode == 'E')
             {
                 //шифруем вектор инициализации
-                CryptDes(CO_CBC, ref EncryptDataBlock, mode);
+                CryptDes(CO_CBC, ref EncryptDataBlock, 'E');
                 Array.Copy(EncryptDataBlock, CO_CBC, 8);
 
                 //скалдываем зашифр вектр с откр текстом
@@ -396,7 +401,7 @@ namespace Cryptograthy
             else
             {
                 //шифруем вектор инициализации
-                CryptDes(CO_CBC, ref EncryptDataBlock, mode);
+                CryptDes(CO_CBC, ref EncryptDataBlock, 'E');
                 Array.Copy(InitDataBlock, CO_CBC, 8);
                 //скалдываем зашифр вектр с откр текстом
                 for (int i = 0; i < InitDataBlock.Length; i++)
@@ -730,6 +735,7 @@ namespace Cryptograthy
             int place = 0;
             byte[] InitDataBlock = new byte[8]; //64 бита
             byte[] EncryptDataBlock = new byte[8]; //64 бита
+            CO_CBC = Encoding.ASCII.GetBytes("DESkey28");
 
             while (place < bytes.Length)
             {
@@ -790,6 +796,7 @@ namespace Cryptograthy
             int place = 0;
             byte[] InitDataBlock = new byte[8]; //64 бита
             byte[] EncryptDataBlock = new byte[8]; //64 бита
+            CO_CBC = Encoding.ASCII.GetBytes("DESkey28");
             while (place < bytes.Length)
             {
                 for (int i = 0; i < 8; i++)
