@@ -217,7 +217,7 @@ namespace Cryptograthy
                     label1.Update();
                     pb.Value = 0;
                     pb.Maximum = EncryptedData.Count;
-                    BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.OpenOrCreate), Encoding.Default);
+                    BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.Create), Encoding.Default);
                     foreach (var b in EncryptedData)
                     {
                         writer.Write(b);
@@ -313,7 +313,7 @@ namespace Cryptograthy
                     label1.Update();
                     pb.Value = 0;
                     pb.Maximum = EncryptedData.Count;
-                    BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.OpenOrCreate), Encoding.Default);
+                    BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.Create), Encoding.Default);
                     foreach (var b in EncryptedData)
                     {
                         pb.Value++;
@@ -402,7 +402,7 @@ namespace Cryptograthy
             {
                 //шифруем вектор инициализации
                 CryptDes(CO_CBC, ref EncryptDataBlock, 'E');
-                Array.Copy(InitDataBlock, CO_CBC, 8);
+                Array.Copy(EncryptDataBlock, CO_CBC, 8);
                 //скалдываем зашифр вектр с откр текстом
                 for (int i = 0; i < InitDataBlock.Length; i++)
                 {
