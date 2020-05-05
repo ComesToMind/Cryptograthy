@@ -400,5 +400,11 @@ namespace Cryptograthy
             form.ShowDialog();
 
         }
+
+        private void freq_button_Click(object sender, EventArgs e)
+        {
+            var form = new FrequenAnalyzDialog();
+            form.ShowDialog();
+        }
     }
 }

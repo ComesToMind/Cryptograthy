@@ -47,10 +47,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel_each = new System.Windows.Forms.Panel();
+            this.crypt_label = new System.Windows.Forms.Label();
             this.decypher = new System.Windows.Forms.Button();
             this.cypher = new System.Windows.Forms.Button();
             this.exchange = new System.Windows.Forms.Button();
-            this.crypt_label = new System.Windows.Forms.Label();
+            this.hill_button = new System.Windows.Forms.Button();
+            this.freq_button = new System.Windows.Forms.Button();
+            this.polyalph_button = new System.Windows.Forms.Button();
             this.flowLayoutPanel2.SuspendLayout();
             this.panel_each.SuspendLayout();
             this.SuspendLayout();
@@ -69,7 +72,10 @@
             this.flowLayoutPanel2.Controls.Add(this.vigenere_button);
             this.flowLayoutPanel2.Controls.Add(this.playfair_button);
             this.flowLayoutPanel2.Controls.Add(this.vername_button);
+            this.flowLayoutPanel2.Controls.Add(this.hill_button);
             this.flowLayoutPanel2.Controls.Add(this.xor_cipher_button);
+            this.flowLayoutPanel2.Controls.Add(this.freq_button);
+            this.flowLayoutPanel2.Controls.Add(this.polyalph_button);
             this.flowLayoutPanel2.Controls.Add(this.des_button);
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
@@ -203,7 +209,7 @@
             // xor_cipher_button
             // 
             this.xor_cipher_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.xor_cipher_button.Location = new System.Drawing.Point(3, 806);
+            this.xor_cipher_button.Location = new System.Drawing.Point(3, 879);
             this.xor_cipher_button.Name = "xor_cipher_button";
             this.xor_cipher_button.Size = new System.Drawing.Size(133, 67);
             this.xor_cipher_button.TabIndex = 11;
@@ -214,7 +220,7 @@
             // des_button
             // 
             this.des_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.des_button.Location = new System.Drawing.Point(3, 879);
+            this.des_button.Location = new System.Drawing.Point(3, 1098);
             this.des_button.Name = "des_button";
             this.des_button.Size = new System.Drawing.Size(133, 67);
             this.des_button.TabIndex = 10;
@@ -272,6 +278,15 @@
             this.panel_each.TabIndex = 4;
             this.panel_each.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_each_Paint);
             // 
+            // crypt_label
+            // 
+            this.crypt_label.AutoSize = true;
+            this.crypt_label.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.crypt_label.Location = new System.Drawing.Point(459, 17);
+            this.crypt_label.Name = "crypt_label";
+            this.crypt_label.Size = new System.Drawing.Size(0, 17);
+            this.crypt_label.TabIndex = 4;
+            // 
             // decypher
             // 
             this.decypher.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -304,14 +319,36 @@
             this.exchange.UseVisualStyleBackColor = true;
             this.exchange.Click += new System.EventHandler(this.exchange_Click);
             // 
-            // crypt_label
+            // hill_button
             // 
-            this.crypt_label.AutoSize = true;
-            this.crypt_label.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.crypt_label.Location = new System.Drawing.Point(459, 17);
-            this.crypt_label.Name = "crypt_label";
-            this.crypt_label.Size = new System.Drawing.Size(0, 17);
-            this.crypt_label.TabIndex = 4;
+            this.hill_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.hill_button.Location = new System.Drawing.Point(3, 806);
+            this.hill_button.Name = "hill_button";
+            this.hill_button.Size = new System.Drawing.Size(133, 67);
+            this.hill_button.TabIndex = 12;
+            this.hill_button.Text = "Шифр Хилла";
+            this.hill_button.UseVisualStyleBackColor = true;
+            // 
+            // freq_button
+            // 
+            this.freq_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.freq_button.Location = new System.Drawing.Point(3, 952);
+            this.freq_button.Name = "freq_button";
+            this.freq_button.Size = new System.Drawing.Size(133, 67);
+            this.freq_button.TabIndex = 13;
+            this.freq_button.Text = "Частотный криптоанализ";
+            this.freq_button.UseVisualStyleBackColor = true;
+            this.freq_button.Click += new System.EventHandler(this.freq_button_Click);
+            // 
+            // polyalph_button
+            // 
+            this.polyalph_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.polyalph_button.Location = new System.Drawing.Point(3, 1025);
+            this.polyalph_button.Name = "polyalph_button";
+            this.polyalph_button.Size = new System.Drawing.Size(133, 67);
+            this.polyalph_button.TabIndex = 14;
+            this.polyalph_button.Text = "Криптоанализ полиалфавитных шифров";
+            this.polyalph_button.UseVisualStyleBackColor = true;
             // 
             // Kazakevich
             // 
@@ -361,6 +398,9 @@
         private System.Windows.Forms.Button xor_cipher_button;
         public System.Windows.Forms.Panel panel_each;
         private System.Windows.Forms.Label crypt_label;
+        private System.Windows.Forms.Button hill_button;
+        private System.Windows.Forms.Button freq_button;
+        private System.Windows.Forms.Button polyalph_button;
     }
 }
 

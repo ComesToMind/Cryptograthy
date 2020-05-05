@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections;
 namespace Cryptograthy
 {
     partial class Kazakevich
@@ -49,8 +50,12 @@ namespace Cryptograthy
             }
             for (int i = 0; i < first_data.Length; i++)
             {
-                
-                first_data[i] ^= flagInit[i];
+                BitArray text_symbol = new BitArray(BitConverter.GetBytes(first_data[i]));
+                BitArray key_symbol = new BitArray(BitConverter.GetBytes(flagInit[i]));
+                text_symbol.Xor(key_symbol);
+                byte[] one = new byte[2];
+                text_symbol.CopyTo(one, 0);
+                first_data[i] = BitConverter.ToChar(one,0);
                
             }
             textBox2.Clear();
