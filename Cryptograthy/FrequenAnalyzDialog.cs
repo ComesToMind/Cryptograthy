@@ -18,9 +18,16 @@ namespace Cryptograthy
             InitializeComponent();
             lettersGridView.ColumnCount = 4;
             lettersGridView.RowCount = 1;
+            lettersGridView.AllowUserToAddRows = false;
+            lettersGridView.Columns[0].HeaderText = "Буква";
+            lettersGridView.Columns[1].HeaderText = "Кол-во";
+            lettersGridView.Columns[2].HeaderText = "Реальная \n частота";
+            lettersGridView.Columns[3].HeaderText = "Табличная \n частота";
+
             replaceGridView.ColumnCount= 2;
+
             //replaceGridView.RowCount = 1;
-            replaceGridView.Columns[0].HeaderText = "Заменить на\n символ";
+            replaceGridView.Columns[0].HeaderText = "ЗАМЕНИТЬ на\n символ";
             replaceGridView.Columns[1].HeaderText = "Исходный \n символ";
             replaceGridView.RowHeadersVisible = false;
             replaceGridView.Columns[1].ReadOnly = true;
@@ -28,6 +35,7 @@ namespace Cryptograthy
 
 
         }
+        string save_textBox2 = null;
         public string ru = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
         public string en = "abcdefghijklmnopqrstuvwxyz";
         public double[] freqsRu = { 0.062,0.014,0.038,0.013,0.025,0.072,0.0001,0.007,0.016,0.062,0.01,0.028,0.035,0.026,0.053,
@@ -38,93 +46,8 @@ namespace Cryptograthy
         public string Alphabet = null; //алфавит текста под анализ
         public int AmountSymbol; //количество символов в исходном тексте
 
-        private void ReadText_Click(object sender, EventArgs e)
-        {
-            textBox1.Clear();
 
-            string FileText = null;
-            Stream myStream = null;
-            OpenFileDialog myDialog = new OpenFileDialog();
-
-            //myDialog.InitialDirectory = "C:\\Users\\Александр\\Documents\\Мои документы\\Visual Studio 2015\\Projects\\Cryptanalysis";
-            //myDialog.DefaultExt = "txt";
-            //myDialog.FileName = "1.txt";
-            //myDialog.Filter = "TXT|*.txt";
-            //myDialog.FilterIndex = 2;
-            //myDialog.RestoreDirectory = true;
-
-            if (myDialog.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    if ((myStream = myDialog.OpenFile()) != null)
-                    {
-                        FileText = new StreamReader(myStream, Encoding.GetEncoding(1251)).ReadToEnd();
-                        myStream.Close();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
-                }
-            }
-
-            FileText = FileText.ToLower();
-            //Подсчитаем количество русских и английских букв, количество их вхождений
-            int AmountRu = 0, AmountEn = 0;
-            for (int i = 0; i < FileText.Length; i++)
-            {
-                if (ru.IndexOf(FileText[i]) >= 0)
-                {
-                    AmountRu++;
-                }
-                if (en.IndexOf(FileText[i]) >= 0)
-                {
-                    AmountEn++;
-                }
-            }
-
-            if (AmountRu > 0)
-            {
-                Alphabet = ru;
-                AmountSymbol = AmountRu;
-            }
-            if (AmountEn > 0)
-            {
-                Alphabet = en;
-                AmountSymbol = AmountEn;
-            }
-
-            textBox1.Text = FileText;
-
-            if (AmountEn * AmountRu > 0)
-            {
-                textBox1.Clear();
-                MessageBox.Show("Перемешивание разных языков запрещено", "Ошибка");
-            }
-        }
-
-        private void SaveText_Click(object sender, EventArgs e)
-        {
-            StreamWriter myStream = null;
-            SaveFileDialog myDialog = new SaveFileDialog();
-
-            myDialog.InitialDirectory = "C:\\Users\\Александр\\Documents\\Мои документы\\Visual Studio 2015\\Projects\\Cryptanalysis";
-            myDialog.DefaultExt = "txt";
-            myDialog.FileName = "2.txt";
-            myDialog.Filter = "TXT|*.txt";
-            myDialog.FilterIndex = 2;
-            myDialog.RestoreDirectory = true;
-
-            if (myDialog.ShowDialog() == DialogResult.OK)
-            {
-                if ((myStream = new StreamWriter(myDialog.OpenFile(), Encoding.GetEncoding(1251))) != null)
-                {
-                    myStream.WriteLine(Convert.ToString(textBox2.Text));
-                    myStream.Close();
-                }
-            }
-        }
+        
 
        
         private void Table_Chart()
@@ -151,7 +74,7 @@ namespace Cryptograthy
             }
 
             lettersGridView.ColumnCount = 4;
-            lettersGridView.RowCount = 1;
+            lettersGridView.RowCount = 0;
             int real_index = 0;
             for (int i = 0; i < times_ru.Length; i++)
             {
@@ -185,6 +108,8 @@ namespace Cryptograthy
                 for (int i = 0; i < times_ru.Length; i++)
                 {
                     letters_chart.Series[0].Points.Add(times_ru[i]);
+                    letters_chart.Series[0].Points[i].Label = ru[i].ToString();
+
                 }
             }
             if (amount_en > 0)
@@ -192,8 +117,11 @@ namespace Cryptograthy
                 for (int i = 0; i < times_en.Length; i++)
                 {
                     letters_chart.Series[0].Points.Add(times_en[i]);
+                    letters_chart.Series[0].Points[i].Label = en[i].ToString();
+
                 }
             }
+            
         }
 
 
@@ -236,8 +164,7 @@ namespace Cryptograthy
                 }
             }
 
-            //Real.OrderByDescending(key => key.Value);
-            //Calculated.OrderByDescending(key => key.Value);
+            
             var List_Real = Real.ToList();
             List_Real.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value));
             List_Real.Reverse();
@@ -248,6 +175,7 @@ namespace Cryptograthy
 
 
             //заполняем таблицу редактирования символов
+            replaceGridView.RowCount =0;
             int real_index = 0;
             foreach (var item in List_Calculated)
             {
@@ -261,19 +189,7 @@ namespace Cryptograthy
                 replaceGridView.Rows[real_index].Cells[1].Value = Convert.ToString(item.Key);
                 real_index++;
             }
-
-            //string temp = null;
-            //foreach (var item in List_Real)
-            //{
-            //    temp += Convert.ToString(item.Key) + "-" + Convert.ToString(item.Value) + " ";
-            //}
-            //richTextBoxReal.Text = temp;
-            //temp = null;
-            //foreach (var item in List_Calculated)
-            //{
-            //    temp += Convert.ToString(item.Key) + "-" + Convert.ToString(item.Value) + " ";
-            //}
-            //richTextBoxCalculated.Text = temp;
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -319,18 +235,7 @@ namespace Cryptograthy
 
         private void replace_button_Click(object sender, EventArgs e)
         {
-            //string New_Alphabet = null;
-            //for (int i = 0; i < Alphabet.Length; i++)
-            //{
-            //    if (replaceGridView.Rows[i].Cells[1].Value.ToString() != "")
-            //    {
-            //        New_Alphabet += replaceGridView.Rows[i].Cells[1].Value.ToString();
-            //    }
-            //    else
-            //    {
-            //        New_Alphabet += " ";
-            //    }
-            //}
+          
             string first = string.Empty;
             foreach (DataGridViewRow row in replaceGridView.Rows)
             {
@@ -350,7 +255,7 @@ namespace Cryptograthy
                     second += " ";
             }
 
-
+            save_textBox2 = textBox2.Text.ToLower();
             string Text = textBox1.Text.ToLower();
             char[] New_Text = Text.ToArray();
 
@@ -373,6 +278,99 @@ namespace Cryptograthy
 
             textBox2.Text = Text;
         }
+
+        private void cancel_button_Click(object sender, EventArgs e)
+        {
+            if (save_textBox2 != null && save_textBox2 != "")
+            {
+                textBox2.Text = save_textBox2;
+            }
+        }
+
+        private void read_file_button_Click(object sender, EventArgs e)
+        {
+            textBox1.Clear();
+
+            string FileText = null;
+            Stream myStream = null;
+            OpenFileDialog myDialog = new OpenFileDialog();
+
+            myDialog.DefaultExt = "txt";
+            myDialog.Filter = "TXT|*.txt";
+
+            if (myDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    if ((myStream = myDialog.OpenFile()) != null)
+                    {
+                        FileText = new StreamReader(myStream, Encoding.UTF8).ReadToEnd();
+                        myStream.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+            }
+
+            FileText = FileText.ToLower();
+            //Подсчитаем количество русских и английских букв, количество их вхождений
+            int AmountRu = 0, AmountEn = 0;
+            for (int i = 0; i < FileText.Length; i++)
+            {
+                if (ru.IndexOf(FileText[i]) >= 0)
+                {
+                    AmountRu++;
+                }
+                if (en.IndexOf(FileText[i]) >= 0)
+                {
+                    AmountEn++;
+                }
+            }
+
+            if (AmountRu > 0)
+            {
+                Alphabet = ru;
+                AmountSymbol = AmountRu;
+            }
+            if (AmountEn > 0)
+            {
+                Alphabet = en;
+                AmountSymbol = AmountEn;
+            }
+
+            textBox1.Text = FileText;
+
+            if (AmountEn * AmountRu > 0)
+            {
+                textBox1.Clear();
+                MessageBox.Show("Перемешивание разных языков запрещено", "Ошибка");
+            }
+
+        }
+
+        private void save_file_button_Click(object sender, EventArgs e)
+        {
+            
+                StreamWriter myStream = null;
+                SaveFileDialog myDialog = new SaveFileDialog();
+
+                myDialog.DefaultExt = "txt";
+                myDialog.Filter = "TXT|*.txt";
+
+                if (myDialog.ShowDialog() == DialogResult.OK)
+                {
+                    if ((myStream = new StreamWriter(myDialog.OpenFile(), Encoding.UTF8)) != null)
+                    {
+                        myStream.WriteLine(Convert.ToString(textBox2.Text));
+                        myStream.Close();
+                    }
+                }
+            
+        }
+
+        
     }
 }
 

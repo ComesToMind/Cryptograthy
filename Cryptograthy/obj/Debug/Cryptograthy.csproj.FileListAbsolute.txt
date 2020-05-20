@@ -12,3 +12,4 @@ C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptogra
 C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.XORDialog.resources
 C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.StateStandard.resources
 C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.FrequenAnalyzDialog.resources
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Debug\Cryptograthy.Polyalph.resources

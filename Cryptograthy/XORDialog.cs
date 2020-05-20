@@ -22,6 +22,7 @@ namespace Cryptograthy
             textBoxB.Text = "1";
             textBoxXo.Text = "250";
             labelM.Text = "m = " + m.ToString();
+            labelCacl.Text = "Длина раунда = " + m.ToString();
         }
 
         uint m = 3571;

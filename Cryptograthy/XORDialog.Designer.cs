@@ -38,7 +38,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.labelM = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -46,6 +45,8 @@
             this.round_calc_button = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.labelCacl = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -86,21 +87,21 @@
             // 
             // textBoxA
             // 
-            this.textBoxA.Location = new System.Drawing.Point(375, 325);
+            this.textBoxA.Location = new System.Drawing.Point(94, 47);
             this.textBoxA.Name = "textBoxA";
             this.textBoxA.Size = new System.Drawing.Size(66, 20);
             this.textBoxA.TabIndex = 4;
             // 
             // textBoxB
             // 
-            this.textBoxB.Location = new System.Drawing.Point(375, 352);
+            this.textBoxB.Location = new System.Drawing.Point(94, 74);
             this.textBoxB.Name = "textBoxB";
             this.textBoxB.Size = new System.Drawing.Size(66, 20);
             this.textBoxB.TabIndex = 5;
             // 
             // textBoxXo
             // 
-            this.textBoxXo.Location = new System.Drawing.Point(375, 379);
+            this.textBoxXo.Location = new System.Drawing.Point(94, 101);
             this.textBoxXo.Name = "textBoxXo";
             this.textBoxXo.Size = new System.Drawing.Size(66, 20);
             this.textBoxXo.TabIndex = 6;
@@ -108,7 +109,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(353, 325);
+            this.label1.Location = new System.Drawing.Point(72, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(16, 13);
             this.label1.TabIndex = 7;
@@ -117,7 +118,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(356, 355);
+            this.label2.Location = new System.Drawing.Point(75, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(13, 13);
             this.label2.TabIndex = 8;
@@ -126,26 +127,16 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(351, 382);
+            this.label3.Location = new System.Drawing.Point(70, 104);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(20, 13);
             this.label3.TabIndex = 9;
             this.label3.Text = "Xo";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(229, 329);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(104, 54);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Линейный \r\nконгруэнтный\r\n метод";
-            // 
             // labelM
             // 
             this.labelM.AutoSize = true;
-            this.labelM.Location = new System.Drawing.Point(353, 302);
+            this.labelM.Location = new System.Drawing.Point(72, 24);
             this.labelM.Name = "labelM";
             this.labelM.Size = new System.Drawing.Size(90, 13);
             this.labelM.TabIndex = 11;
@@ -154,7 +145,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(448, 328);
+            this.label6.Location = new System.Drawing.Point(167, 50);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(56, 13);
             this.label6.TabIndex = 12;
@@ -163,7 +154,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(448, 382);
+            this.label7.Location = new System.Drawing.Point(167, 104);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 13);
             this.label7.TabIndex = 13;
@@ -172,7 +163,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(448, 355);
+            this.label8.Location = new System.Drawing.Point(167, 77);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(56, 13);
             this.label8.TabIndex = 14;
@@ -202,35 +193,46 @@
             this.labelCacl.AutoSize = true;
             this.labelCacl.Location = new System.Drawing.Point(598, 369);
             this.labelCacl.Name = "labelCacl";
-            this.labelCacl.Size = new System.Drawing.Size(120, 13);
+            this.labelCacl.Size = new System.Drawing.Size(10, 13);
             this.labelCacl.TabIndex = 17;
-            this.labelCacl.Text = "Длина раунда = 65521";
+            this.labelCacl.Text = " ";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.labelM);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.textBoxXo);
+            this.groupBox1.Controls.Add(this.textBoxB);
+            this.groupBox1.Controls.Add(this.textBoxA);
+            this.groupBox1.Location = new System.Drawing.Point(281, 278);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(239, 142);
+            this.groupBox1.TabIndex = 18;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Линейный  конгруэнтный метод";
             // 
             // XORDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.labelCacl);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.round_calc_button);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.labelM);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxXo);
-            this.Controls.Add(this.textBoxB);
-            this.Controls.Add(this.textBoxA);
             this.Controls.Add(this.decrypt_button);
             this.Controls.Add(this.encrypt_button);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Name = "XORDialog";
-            this.Text = "XORDialog";
+            this.Text = "Гаммирование";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,7 +250,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelM;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
@@ -256,5 +257,6 @@
         private System.Windows.Forms.Button round_calc_button;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label labelCacl;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

@@ -11,7 +11,7 @@ namespace Cryptograthy
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
-        [STAThread]
+        [STAThreadAttribute]
         static void Main()
         {
             Application.EnableVisualStyles();

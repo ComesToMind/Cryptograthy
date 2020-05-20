@@ -253,7 +253,7 @@
             this.Controls.Add(this.lb);
             this.Controls.Add(this.pb);
             this.Name = "DESDialog";
-            this.Text = "DESDialog";
+            this.Text = " DES ";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

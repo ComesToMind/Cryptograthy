@@ -40,7 +40,10 @@
             this.vigenere_button = new System.Windows.Forms.Button();
             this.playfair_button = new System.Windows.Forms.Button();
             this.vername_button = new System.Windows.Forms.Button();
+            this.hill_button = new System.Windows.Forms.Button();
             this.xor_cipher_button = new System.Windows.Forms.Button();
+            this.freq_button = new System.Windows.Forms.Button();
+            this.polyalph_button = new System.Windows.Forms.Button();
             this.des_button = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -51,9 +54,6 @@
             this.decypher = new System.Windows.Forms.Button();
             this.cypher = new System.Windows.Forms.Button();
             this.exchange = new System.Windows.Forms.Button();
-            this.hill_button = new System.Windows.Forms.Button();
-            this.freq_button = new System.Windows.Forms.Button();
-            this.polyalph_button = new System.Windows.Forms.Button();
             this.flowLayoutPanel2.SuspendLayout();
             this.panel_each.SuspendLayout();
             this.SuspendLayout();
@@ -206,6 +206,17 @@
             this.vername_button.UseVisualStyleBackColor = true;
             this.vername_button.Click += new System.EventHandler(this.vername_button_Click);
             // 
+            // hill_button
+            // 
+            this.hill_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.hill_button.Location = new System.Drawing.Point(3, 806);
+            this.hill_button.Name = "hill_button";
+            this.hill_button.Size = new System.Drawing.Size(133, 67);
+            this.hill_button.TabIndex = 12;
+            this.hill_button.Text = "Шифр Хилла";
+            this.hill_button.UseVisualStyleBackColor = true;
+            this.hill_button.Click += new System.EventHandler(this.hill_button_Click);
+            // 
             // xor_cipher_button
             // 
             this.xor_cipher_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
@@ -216,6 +227,28 @@
             this.xor_cipher_button.Text = "Метод Гаммирования";
             this.xor_cipher_button.UseVisualStyleBackColor = true;
             this.xor_cipher_button.Click += new System.EventHandler(this.xor_cipher_button_Click);
+            // 
+            // freq_button
+            // 
+            this.freq_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.freq_button.Location = new System.Drawing.Point(3, 952);
+            this.freq_button.Name = "freq_button";
+            this.freq_button.Size = new System.Drawing.Size(133, 67);
+            this.freq_button.TabIndex = 13;
+            this.freq_button.Text = "Частотный криптоанализ";
+            this.freq_button.UseVisualStyleBackColor = true;
+            this.freq_button.Click += new System.EventHandler(this.freq_button_Click);
+            // 
+            // polyalph_button
+            // 
+            this.polyalph_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.polyalph_button.Location = new System.Drawing.Point(3, 1025);
+            this.polyalph_button.Name = "polyalph_button";
+            this.polyalph_button.Size = new System.Drawing.Size(133, 67);
+            this.polyalph_button.TabIndex = 14;
+            this.polyalph_button.Text = "Криптоанализ полиалфавитных шифров";
+            this.polyalph_button.UseVisualStyleBackColor = true;
+            this.polyalph_button.Click += new System.EventHandler(this.polyalph_button_Click);
             // 
             // des_button
             // 
@@ -318,37 +351,6 @@
             this.exchange.Text = "<--";
             this.exchange.UseVisualStyleBackColor = true;
             this.exchange.Click += new System.EventHandler(this.exchange_Click);
-            // 
-            // hill_button
-            // 
-            this.hill_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.hill_button.Location = new System.Drawing.Point(3, 806);
-            this.hill_button.Name = "hill_button";
-            this.hill_button.Size = new System.Drawing.Size(133, 67);
-            this.hill_button.TabIndex = 12;
-            this.hill_button.Text = "Шифр Хилла";
-            this.hill_button.UseVisualStyleBackColor = true;
-            // 
-            // freq_button
-            // 
-            this.freq_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.freq_button.Location = new System.Drawing.Point(3, 952);
-            this.freq_button.Name = "freq_button";
-            this.freq_button.Size = new System.Drawing.Size(133, 67);
-            this.freq_button.TabIndex = 13;
-            this.freq_button.Text = "Частотный криптоанализ";
-            this.freq_button.UseVisualStyleBackColor = true;
-            this.freq_button.Click += new System.EventHandler(this.freq_button_Click);
-            // 
-            // polyalph_button
-            // 
-            this.polyalph_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.polyalph_button.Location = new System.Drawing.Point(3, 1025);
-            this.polyalph_button.Name = "polyalph_button";
-            this.polyalph_button.Size = new System.Drawing.Size(133, 67);
-            this.polyalph_button.TabIndex = 14;
-            this.polyalph_button.Text = "Криптоанализ полиалфавитных шифров";
-            this.polyalph_button.UseVisualStyleBackColor = true;
             // 
             // Kazakevich
             // 

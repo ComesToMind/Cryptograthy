@@ -9,3 +9,7 @@ C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Release\Cryptog
 C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Release\Cryptograthy.csprojAssemblyReference.cache
 C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Release\Cryptograthy.Kazakevich.resources
 C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Release\Cryptograthy.DESDialog.resources
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Release\Cryptograthy.FrequenAnalyzDialog.resources
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Release\Cryptograthy.StateStandard.resources
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Release\Cryptograthy.XORDialog.resources
+C:\Users\Данила\source\repos\Cryptograthy\Cryptograthy\obj\Release\Cryptograthy.Polyalph.resources

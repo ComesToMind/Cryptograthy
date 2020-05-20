@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using Cryptograthy;
 
 //using static Cryptograthy.Innitial;
-
 namespace Cryptograthy
 {
     public partial class Kazakevich : Form
@@ -72,7 +71,24 @@ namespace Cryptograthy
                 e.Handled = true;
             }
         }
+        private void tbHill_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (
+                    (e.KeyChar < 1040 || e.KeyChar > 1105) &&
+                    (e.KeyChar < 97 || e.KeyChar > 122) &&
+                    (e.KeyChar < 65 || e.KeyChar > 90) &&
+                    (e.KeyChar != 1025) &&
+                    (e.KeyChar != 32) && (e.KeyChar != 33) &&
+                    (e.KeyChar != 39) &&
+                    (e.KeyChar < 44 || e.KeyChar > 46) &&
+                    (e.KeyChar != 58) && (e.KeyChar != 59) &&
+                    (e.KeyChar != 63)
 
+                )
+            {
+                e.Handled = true;
+            }
+        }
 
 
         private void atbash_button_Click(object sender, EventArgs e)
@@ -131,6 +147,10 @@ namespace Cryptograthy
             {
                 Vername(Kind.ENCRYPT);
             }
+            else if (PressedButt == hill_button)
+            {
+                HillEncrypt();
+            }
             //ШИФРОВКА
         }
 
@@ -181,7 +201,10 @@ namespace Cryptograthy
             {
                 Vername(Kind.DECRYPT);
             }
-            
+            else if (PressedButt == hill_button)
+            {
+                HillDecrypt();
+            }
             //РАСШИФРОВКА
         }
 
@@ -386,12 +409,19 @@ namespace Cryptograthy
             controls.Add(tb);
             InitialazePanel();
         }
-
-        private void des_button_Click(object sender, EventArgs e)
+        private async void des_button_Click(object sender, EventArgs e)
         {
             var form = new DESDialog();
+            this.Hide();
+            //await Task.Run(() => form.Show());
+            //Application.Run(form);
             form.ShowDialog();
+            //await Task.Run(() => Application.Run(form));
             
+            this.Show();
+            //form.Show();
+
+
         }
 
         private void xor_cipher_button_Click(object sender, EventArgs e)
@@ -404,6 +434,36 @@ namespace Cryptograthy
         private void freq_button_Click(object sender, EventArgs e)
         {
             var form = new FrequenAnalyzDialog();
+            form.ShowDialog();
+        }
+
+        private void hill_button_Click(object sender, EventArgs e)
+        {
+            ClearPanel();
+            PressedButt = sender as Button;
+            Label lb = new Label();
+            lb.Location = new Point(5, 55);
+            lb.Text = "Введите ключ: ";
+            lb.Size = new Size(98, 13);
+            Label lb1 = new Label();
+            lb1.Location = new Point(5, 70);
+            lb1.Text = "Алфавит: A-Z  a-z  А-Я  а-я  ,.!?-;:' пробел";
+            lb1.AutoSize = true;
+
+
+            tb = new TextBox();
+            tb.Location = new Point(105, 50);
+            tb.Size = new Size(300, 21);
+            tb.KeyPress += tbHill_KeyPress;
+            controls.Add(lb);
+            controls.Add(tb);
+            controls.Add(lb1);
+            InitialazePanel();
+        }
+
+        private void polyalph_button_Click(object sender, EventArgs e)
+        {
+            var form = new Polyalph();
             form.ShowDialog();
         }
     }

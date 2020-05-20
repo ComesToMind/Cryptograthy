@@ -246,7 +246,7 @@
             this.Controls.Add(this.lb);
             this.Controls.Add(this.pb);
             this.Name = "StateStandard";
-            this.Text = "StateStandard";
+            this.Text = "шифр ГОСТ";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
