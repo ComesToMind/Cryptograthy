@@ -136,7 +136,12 @@ namespace Cryptograthy
         //BitArray Key = new BitArray(Encoding.ASCII.GetBytes(strkey.ToCharArray()));
         //static string strkey = "DESkey2";
         //static int[] myInts = new int[2] { 2147455533, 2132343564 };
-        private delegate DialogResult ShowSaveFileDialogInvoker();
+
+        public void SetEnable(bool f)
+        {
+            crypt_file_button.Enabled = decrypt_file_button.Enabled = button1.Enabled =
+                button2.Enabled = button3.Enabled = groupBox1.Enabled = generate_key_button.Enabled = paste_key_button.Enabled = write_key_button.Enabled = read_key_button.Enabled = f;
+        }
 
         public async void DesFileEncrypt(object sender, EventArgs e)
         {
@@ -162,8 +167,7 @@ namespace Cryptograthy
                 byte[] InitDataBlock = new byte[8]; //64 бита
                 byte[] EncryptDataBlock = new byte[8]; //64 бита
                 EncryptedData = new LinkedList<byte>();
-                crypt_file_button.Enabled = decrypt_file_button.Enabled = button1.Enabled =
-                button2.Enabled = button3.Enabled = groupBox1.Enabled = generate_key_button.Enabled = paste_key_button.Enabled = false;
+                SetEnable(false);
                 await Task.Run(() =>
                 {
                     try
@@ -174,7 +178,7 @@ namespace Cryptograthy
                             {
                                 if (reader.PeekChar() == -1)
                                 {
-                                    InitDataBlock[i] = 0x00;
+                                    InitDataBlock[i] = 0x80;
                                     i++;
                                     while (i < 8)
                                     {
@@ -220,8 +224,7 @@ namespace Cryptograthy
 
 
                 });
-                    crypt_file_button.Enabled = decrypt_file_button.Enabled = button1.Enabled =
-                    button2.Enabled = button3.Enabled = groupBox1.Enabled =generate_key_button.Enabled=paste_key_button.Enabled= true;
+                SetEnable(true);
                     reader.Close();
                     label1.Text = "Готово";
                     pb.Value = 0;
@@ -237,9 +240,9 @@ namespace Cryptograthy
                         label1.Update();
                         pb.Value = 0;
                         pb.Maximum = EncryptedData.Count;
-                        BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.Create), Encoding.Default);
-                    crypt_file_button.Enabled = decrypt_file_button.Enabled = button1.Enabled =
-                    button2.Enabled = button3.Enabled = groupBox1.Enabled = generate_key_button.Enabled = paste_key_button.Enabled = false;
+                        BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.OpenOrCreate), Encoding.Default);
+                    SetEnable(false);
+
                     await Task.Run(() =>
                     {
                         try
@@ -255,8 +258,7 @@ namespace Cryptograthy
 
                         }
                     });
-                    crypt_file_button.Enabled = decrypt_file_button.Enabled = button1.Enabled =
-                    button2.Enabled = button3.Enabled = groupBox1.Enabled = generate_key_button.Enabled = paste_key_button.Enabled = false;
+                    SetEnable(true);
                     writer.Close();
                     pb.Value = 0;
                     label1.Text = "Готово";
@@ -293,6 +295,7 @@ namespace Cryptograthy
                 byte[] EncryptDataBlock = new byte[8]; //64 бита
                 CO_CBC = Encoding.ASCII.GetBytes("DESkey28");
                 bool flagBad = false;
+                SetEnable(false);
                 await Task.Run(() =>
                 {
                     try
@@ -301,19 +304,6 @@ namespace Cryptograthy
                         {
                             for (int i = 0; i < 8; i++)
                             {
-                                if (reader.PeekChar() == -1)
-                                {
-                                    InitDataBlock[i] = 0x00;
-                                    i++;
-                                    while (i < 8)
-                                    {
-                                        InitDataBlock[i] = 0x00;
-                                        i++;
-                                    }
-
-                                    break;
-
-                                }
                                 InitDataBlock[i] = reader.ReadByte();//добавить возможность чтения по 8 байт сразу     
                             }
 
@@ -321,19 +311,28 @@ namespace Cryptograthy
                             {
                                 CryptDes(InitDataBlock, ref EncryptDataBlock, 'D');
                             }
-                            if (CBC_butt.Checked)
+                            else
                             {
-                                CBC(InitDataBlock, ref EncryptDataBlock, 'D');
+                                if (CBC_butt.Checked)
+                                {
+                                    CBC(InitDataBlock, ref EncryptDataBlock, 'D');
+                                }
+                                else
+                                {
+                                    if (CFB_butt.Checked)
+                                    {
+                                        CFB(InitDataBlock, ref EncryptDataBlock, 'D');
+                                    }
+                                    else
+                                    {
+                                        if (OFB_butt.Checked)
+                                        {
+                                            OFB(InitDataBlock, ref EncryptDataBlock, 'D');
+                                        }
+                                    }
+                                }
                             }
-                            if (CFB_butt.Checked)
-                            {
-                                CFB(InitDataBlock, ref EncryptDataBlock, 'D');
-                            }
-                            if (OFB_butt.Checked)
-                            {
-                                OFB(InitDataBlock, ref EncryptDataBlock, 'D');
-                            }
-
+                           
                             foreach (var b in EncryptDataBlock)
                             {
                                 EncryptedData.AddLast(b);
@@ -354,6 +353,22 @@ namespace Cryptograthy
                 CO_CBC = Encoding.ASCII.GetBytes("DESkey28");
                     if (flagBad)
                         return;
+                SetEnable(true);
+
+                for (int i = 0; i < 8; i++)
+                {
+                    if (EncryptedData.Last() == 0x80)
+                    {
+                        EncryptedData.RemoveLast();
+                        break;
+                    }
+                    if (EncryptedData.Last() == 0x00)
+                    {
+                        EncryptedData.RemoveLast();
+                        continue;
+                    }
+                }
+
                 SaveFileDialog Save = new SaveFileDialog();
                 if (Save.ShowDialog() == DialogResult.OK)
                 {
@@ -361,7 +376,9 @@ namespace Cryptograthy
                     label1.Update();
                     pb.Value = 0;
                     pb.Maximum = EncryptedData.Count;
-                    BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.Create), Encoding.Default);
+                    BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.OpenOrCreate), Encoding.Default);
+                    SetEnable(false);
+
                     await Task.Run(()=>
                     {
                         try
@@ -378,7 +395,8 @@ namespace Cryptograthy
                         }
                         
                     });
-                  
+                    SetEnable(true);
+
                     writer.Close();
                     pb.Value = 0;
                     label1.Text = "Готово";
@@ -734,10 +752,7 @@ namespace Cryptograthy
                     byte[] bytes = StringToByteArray(keyTextBox.Text);
                     Key = new BitArray(bytes);
                     DesGenerate_Each_Round_Keys();
-                    crypt_file_button.Enabled = true;
-                    decrypt_file_button.Enabled = true;
-                    button1.Enabled = true;
-                    button2.Enabled = true;
+                    SetEnable(true);
                 }
                 else
                 {
@@ -767,10 +782,7 @@ namespace Cryptograthy
 
 
             keyTextBox.Text = BitConverter.ToString(KeyB).Replace("-", "");
-            crypt_file_button.Enabled = true;
-            decrypt_file_button.Enabled = true;
-            button1.Enabled = true;
-            button2.Enabled = true;
+            SetEnable(true);
             //cmb.Text = Encoding.ASCII.GetString(KeyB);
 
         }
@@ -920,8 +932,75 @@ namespace Cryptograthy
                 }
             }
         }
+
+        private void write_key_button_Click(object sender, EventArgs e)
+        {
+            string pattern = @"[0-9A-F]{14}";
+            if (Regex.IsMatch(keyTextBox.Text, pattern))
+            {
+                byte[] bytes = StringToByteArray(keyTextBox.Text);
+                SaveFileDialog Save = new SaveFileDialog();
+                if (Save.ShowDialog() == DialogResult.OK)
+                {
+
+                    BinaryWriter writer = new BinaryWriter(File.Open(Save.FileName, FileMode.Create), Encoding.Default);
+                    foreach (var b in bytes)
+                    {
+                        writer.Write(b);
+                    }
+                    writer.Close();
+                    label1.Text = "Готово";
+
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Неправильный формат ключа", "Некорректные данные");
+                return;
+            }
+
+        }
+
+        private void read_key_button_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                BinaryReader reader = new BinaryReader(File.Open(open.FileName, FileMode.Open),
+                                                                          Encoding.Default);
+                byte[] KeyB = new byte[7];
+                try
+                {
+                    for (int i = 0; i < 7; i++)
+                    {
+                        KeyB[i] = reader.ReadByte();//добавить возможность чтения по 8 байт сразу     
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ключ слишком корокткий или файл не существует", " Ошибка чтения ключа");
+                    reader.Close();
+                    return;
+                }
+                reader.Close();
+                Key = new BitArray(KeyB);
+                DesGenerate_Each_Round_Keys();
+                keyTextBox.Text = BitConverter.ToString(KeyB).Replace("-", "");
+                SetEnable(true);
+
+            }
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("1) Скорость шифрования 31448 байт/с (Файл 1 Гб будет шифроваться 9 часов на процессоре i5-6200U 8Gb RAM!!!)\n" +
+                            "2) Реализована асинхронность: Есть возможность свернуть программу в процессе шифрования\n" +
+                            "3) При наведении на некоторые UI элементы есть подсказки!!!\n" +
+                            "4) На конце убираются добавочные нули после дешифровки. Word открывается штатно!",
+                "Руководство пользователя");
+
+        }
     }
-
-
-}
-
+  }

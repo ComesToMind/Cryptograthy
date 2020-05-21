@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.keyTextBox = new System.Windows.Forms.TextBox();
@@ -35,7 +36,6 @@
             this.crypt_file_button = new System.Windows.Forms.Button();
             this.decrypt_file_button = new System.Windows.Forms.Button();
             this.paste_key_button = new System.Windows.Forms.Button();
-            this.lb = new System.Windows.Forms.Label();
             this.pb = new System.Windows.Forms.ProgressBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.OFB_butt = new System.Windows.Forms.RadioButton();
@@ -47,7 +47,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
+            this.read_key_button = new System.Windows.Forms.Button();
+            this.write_key_button = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -68,17 +77,18 @@
             // 
             // keyTextBox
             // 
-            this.keyTextBox.Location = new System.Drawing.Point(317, 338);
+            this.keyTextBox.Location = new System.Drawing.Point(116, 72);
             this.keyTextBox.MaxLength = 14;
             this.keyTextBox.Name = "keyTextBox";
             this.keyTextBox.Size = new System.Drawing.Size(110, 20);
             this.keyTextBox.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.keyTextBox, "Формат ключа - 7 байт слитно - Пример: 1A2B3C4D9E6F70");
             // 
             // generate_key_button
             // 
-            this.generate_key_button.Location = new System.Drawing.Point(331, 283);
+            this.generate_key_button.Location = new System.Drawing.Point(116, 17);
             this.generate_key_button.Name = "generate_key_button";
-            this.generate_key_button.Size = new System.Drawing.Size(96, 39);
+            this.generate_key_button.Size = new System.Drawing.Size(110, 49);
             this.generate_key_button.TabIndex = 2;
             this.generate_key_button.Text = "Сгенерировать \r\nключ";
             this.generate_key_button.UseVisualStyleBackColor = true;
@@ -86,19 +96,20 @@
             // 
             // crypt_file_button
             // 
-            this.crypt_file_button.Location = new System.Drawing.Point(441, 283);
+            this.crypt_file_button.Location = new System.Drawing.Point(23, 18);
             this.crypt_file_button.Name = "crypt_file_button";
-            this.crypt_file_button.Size = new System.Drawing.Size(91, 39);
+            this.crypt_file_button.Size = new System.Drawing.Size(91, 49);
             this.crypt_file_button.TabIndex = 3;
             this.crypt_file_button.Text = "Зашифровать файл";
+            this.toolTip1.SetToolTip(this.crypt_file_button, "Подходит файл любого формата");
             this.crypt_file_button.UseVisualStyleBackColor = true;
             this.crypt_file_button.Click += new System.EventHandler(this.DesFileEncrypt);
             // 
             // decrypt_file_button
             // 
-            this.decrypt_file_button.Location = new System.Drawing.Point(538, 283);
+            this.decrypt_file_button.Location = new System.Drawing.Point(120, 18);
             this.decrypt_file_button.Name = "decrypt_file_button";
-            this.decrypt_file_button.Size = new System.Drawing.Size(99, 39);
+            this.decrypt_file_button.Size = new System.Drawing.Size(99, 49);
             this.decrypt_file_button.TabIndex = 4;
             this.decrypt_file_button.Text = "Расшифровать файл";
             this.decrypt_file_button.UseVisualStyleBackColor = true;
@@ -106,25 +117,18 @@
             // 
             // paste_key_button
             // 
-            this.paste_key_button.Location = new System.Drawing.Point(215, 333);
+            this.paste_key_button.Location = new System.Drawing.Point(14, 67);
             this.paste_key_button.Name = "paste_key_button";
-            this.paste_key_button.Size = new System.Drawing.Size(96, 29);
+            this.paste_key_button.Size = new System.Drawing.Size(96, 25);
             this.paste_key_button.TabIndex = 5;
             this.paste_key_button.Text = "Задать ключ";
+            this.toolTip1.SetToolTip(this.paste_key_button, "Применяет введенный Вами ключ");
             this.paste_key_button.UseVisualStyleBackColor = true;
             this.paste_key_button.Click += new System.EventHandler(this.DesReadKey);
             // 
-            // lb
-            // 
-            this.lb.Location = new System.Drawing.Point(212, 374);
-            this.lb.Name = "lb";
-            this.lb.Size = new System.Drawing.Size(328, 27);
-            this.lb.TabIndex = 7;
-            this.lb.Text = "Формат ключа - 7 байт слитно - Пример: 1A2B3C4D9E6F70";
-            // 
             // pb
             // 
-            this.pb.Location = new System.Drawing.Point(441, 338);
+            this.pb.Location = new System.Drawing.Point(23, 73);
             this.pb.Name = "pb";
             this.pb.Size = new System.Drawing.Size(196, 20);
             this.pb.TabIndex = 8;
@@ -135,7 +139,7 @@
             this.groupBox1.Controls.Add(this.CFB_butt);
             this.groupBox1.Controls.Add(this.CBC_butt);
             this.groupBox1.Controls.Add(this.ECB_butt);
-            this.groupBox1.Location = new System.Drawing.Point(92, 283);
+            this.groupBox1.Location = new System.Drawing.Point(92, 258);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(103, 118);
             this.groupBox1.TabIndex = 9;
@@ -198,18 +202,20 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(489, 48);
+            this.button2.Location = new System.Drawing.Point(477, 48);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(89, 23);
+            this.button2.Size = new System.Drawing.Size(101, 23);
             this.button2.TabIndex = 11;
-            this.button2.Text = "Дешифровать";
+            this.button2.Text = "Расшифровать";
+            this.toolTip2.SetToolTip(this.button2, "0x00 байт не отображается в окне, поэтому могут иногда возникать ошибки расшифров" +
+        "ки, в отличие от работы с файлами");
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(644, 344);
+            this.label1.Location = new System.Drawing.Point(226, 79);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 12;
@@ -232,30 +238,93 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // read_key_button
+            // 
+            this.read_key_button.Location = new System.Drawing.Point(14, 17);
+            this.read_key_button.Name = "read_key_button";
+            this.read_key_button.Size = new System.Drawing.Size(96, 25);
+            this.read_key_button.TabIndex = 15;
+            this.read_key_button.Text = "Ключ из файла";
+            this.toolTip1.SetToolTip(this.read_key_button, "Считывает первые 7 байт файла!");
+            this.read_key_button.UseVisualStyleBackColor = true;
+            this.read_key_button.Click += new System.EventHandler(this.read_key_button_Click);
+            // 
+            // write_key_button
+            // 
+            this.write_key_button.Location = new System.Drawing.Point(14, 42);
+            this.write_key_button.Name = "write_key_button";
+            this.write_key_button.Size = new System.Drawing.Size(96, 25);
+            this.write_key_button.TabIndex = 16;
+            this.write_key_button.Text = "Ключ в файл";
+            this.toolTip1.SetToolTip(this.write_key_button, "Записывает ключ побайтово!");
+            this.write_key_button.UseVisualStyleBackColor = true;
+            this.write_key_button.Click += new System.EventHandler(this.write_key_button_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.write_key_button);
+            this.groupBox2.Controls.Add(this.read_key_button);
+            this.groupBox2.Controls.Add(this.generate_key_button);
+            this.groupBox2.Controls.Add(this.paste_key_button);
+            this.groupBox2.Controls.Add(this.keyTextBox);
+            this.groupBox2.Location = new System.Drawing.Point(201, 258);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(241, 117);
+            this.groupBox2.TabIndex = 17;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Работа с ключом";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.crypt_file_button);
+            this.groupBox3.Controls.Add(this.decrypt_file_button);
+            this.groupBox3.Controls.Add(this.pb);
+            this.groupBox3.Location = new System.Drawing.Point(464, 258);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(285, 117);
+            this.groupBox3.TabIndex = 18;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Работа с файлом";
+            this.toolTip1.SetToolTip(this.groupBox3, "Подходит файл любого формата");
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.Info;
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label3.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label3.Location = new System.Drawing.Point(12, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(142, 15);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Руковдство пользователя";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
             // DESDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.generate_key_button);
-            this.Controls.Add(this.paste_key_button);
-            this.Controls.Add(this.crypt_file_button);
-            this.Controls.Add(this.decrypt_file_button);
-            this.Controls.Add(this.keyTextBox);
-            this.Controls.Add(this.lb);
-            this.Controls.Add(this.pb);
             this.Name = "DESDialog";
             this.Text = " DES ";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,7 +339,6 @@
         private System.Windows.Forms.Button crypt_file_button;
         private System.Windows.Forms.Button decrypt_file_button;
         private System.Windows.Forms.Button paste_key_button;
-        private System.Windows.Forms.Label lb;
         private System.Windows.Forms.ProgressBar pb;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton OFB_butt;
@@ -282,5 +350,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip toolTip2;
+        private System.Windows.Forms.Button read_key_button;
+        private System.Windows.Forms.Button write_key_button;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label3;
     }
 }
