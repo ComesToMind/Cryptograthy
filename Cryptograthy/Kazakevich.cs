@@ -413,13 +413,8 @@ namespace Cryptograthy
         {
             var form = new DESDialog();
             this.Hide();
-            //await Task.Run(() => form.Show());
-            //Application.Run(form);
             form.ShowDialog();
-            //await Task.Run(() => Application.Run(form));
-            
             this.Show();
-            //form.Show();
 
 
         }
@@ -465,6 +460,15 @@ namespace Cryptograthy
         {
             var form = new Polyalph();
             form.ShowDialog();
+        }
+
+        private void state_standard_button_Click(object sender, EventArgs e)
+        {
+            var form = new StateStandard();
+            this.Hide();
+            form.ShowDialog();
+            this.Show();
+
         }
     }
 }

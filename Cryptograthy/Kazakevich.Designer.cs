@@ -54,6 +54,7 @@
             this.decypher = new System.Windows.Forms.Button();
             this.cypher = new System.Windows.Forms.Button();
             this.exchange = new System.Windows.Forms.Button();
+            this.state_standard_button = new System.Windows.Forms.Button();
             this.flowLayoutPanel2.SuspendLayout();
             this.panel_each.SuspendLayout();
             this.SuspendLayout();
@@ -77,6 +78,7 @@
             this.flowLayoutPanel2.Controls.Add(this.freq_button);
             this.flowLayoutPanel2.Controls.Add(this.polyalph_button);
             this.flowLayoutPanel2.Controls.Add(this.des_button);
+            this.flowLayoutPanel2.Controls.Add(this.state_standard_button);
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -352,6 +354,17 @@
             this.exchange.UseVisualStyleBackColor = true;
             this.exchange.Click += new System.EventHandler(this.exchange_Click);
             // 
+            // state_standard_button
+            // 
+            this.state_standard_button.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.state_standard_button.Location = new System.Drawing.Point(3, 1171);
+            this.state_standard_button.Name = "state_standard_button";
+            this.state_standard_button.Size = new System.Drawing.Size(133, 67);
+            this.state_standard_button.TabIndex = 15;
+            this.state_standard_button.Text = "ГОСТ 28147-89";
+            this.state_standard_button.UseVisualStyleBackColor = true;
+            this.state_standard_button.Click += new System.EventHandler(this.state_standard_button_Click);
+            // 
             // Kazakevich
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -403,6 +416,7 @@
         private System.Windows.Forms.Button hill_button;
         private System.Windows.Forms.Button freq_button;
         private System.Windows.Forms.Button polyalph_button;
+        private System.Windows.Forms.Button state_standard_button;
     }
 }
 

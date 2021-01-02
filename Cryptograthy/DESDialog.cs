@@ -143,10 +143,11 @@ namespace Cryptograthy
                 button2.Enabled = button3.Enabled = groupBox1.Enabled = generate_key_button.Enabled = paste_key_button.Enabled = write_key_button.Enabled = read_key_button.Enabled = f;
         }
 
+
         public async void DesFileEncrypt(object sender, EventArgs e)
         {
         //зашифрованный текст по  битам храним в листе
-        LinkedList<byte> EncryptedData;
+            LinkedList<byte> EncryptedData;
             OpenFileDialog read = new OpenFileDialog();
             //читаем бинарно файл
             bool flagBad = false;
@@ -236,7 +237,7 @@ namespace Cryptograthy
                     SaveFileDialog Save = new SaveFileDialog();
                     if (Save.ShowDialog() == DialogResult.OK)
                     {
-                        label1.Text = "";
+                        label1.Text = "Загрузка в файл";
                         label1.Update();
                         pb.Value = 0;
                         pb.Maximum = EncryptedData.Count;
@@ -247,11 +248,8 @@ namespace Cryptograthy
                     {
                         try
                         {
-                            foreach (var b in EncryptedData)
-                            {
-                                writer.Write(b);
-                                this.Invoke(new Action(() => pb.Value++));
-                            }
+                            writer.Write(EncryptedData.ToArray(), 0, EncryptedData.Count);
+
                         }
                         catch (Exception ex)
                         {
@@ -372,7 +370,7 @@ namespace Cryptograthy
                 SaveFileDialog Save = new SaveFileDialog();
                 if (Save.ShowDialog() == DialogResult.OK)
                 {
-                    label1.Text = "";
+                    label1.Text = "Загрузка в файл";
                     label1.Update();
                     pb.Value = 0;
                     pb.Maximum = EncryptedData.Count;
@@ -383,11 +381,8 @@ namespace Cryptograthy
                     {
                         try
                         {
-                            foreach (var b in EncryptedData)
-                            {
-                                this.Invoke(new Action(() => pb.Value++));
-                                writer.Write(b);
-                            }
+                            writer.Write(EncryptedData.ToArray(), 0, EncryptedData.Count);
+
                         }
                         catch (Exception ex)
                         {
@@ -952,7 +947,6 @@ namespace Cryptograthy
                     label1.Text = "Готово";
 
                 }
-                
             }
             else
             {
